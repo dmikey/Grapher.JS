@@ -10,6 +10,6 @@ gL=rI(o.width)/2
 for(i=0;i<=1;i++){G.innerHTML+='<div id="axis%" style="position:absolute;margin-top:'+(gT*i)+'px;margin-left:'+((gL)-(gL*i))+';">%</div>'.replace(/%/gi,A[i])}
 count=0
 if(!o.type){m("need chart type",G);return false;}
-var p=10;for(var i in d){if(d.hasOwnProperty(i)){switch(o.type){case"bar":G.innerHTML+='<div id="d" style="height:'+d[i]+'px;background-color:red;width:20px;position:absolute;margin-top:-'+(d[i]+1)+'px;margin-left:'+(20*count+20+p*count)+'px;margin-right:'+p+'px;"> </div>';break;case"line":break;}};count++}}}
+var p=10;for(var i in d){if(d.hasOwnProperty(i)){switch(o.type){case"bar":G.innerHTML+='<div id="d" style="height:'+d[i]+'px;background-color:red;width:20px;position:absolute;margin-top:-'+(d[i]+1)+'px;margin-left:'+(20*count+20+p*count)+'px;margin-right:'+p+'px;"> </div>';G.innerHTML+='<div id="d" style="width:20px;position:absolute;margin-top:-'+(d[i]+20)+'px;margin-left:'+(20*count+20+p*count)+'px;margin-right:'+p+'px;">'+(d[i])+'</div>';break;case"line":break;}};count++}}}
 function m(t,g){g.innerHTML=t;}
 function rI(i){return parseInt(i);}}(grapher,document);

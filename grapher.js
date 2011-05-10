@@ -57,6 +57,8 @@ if (typeof Object.create != 'function'){
 							switch (o.type) {
 								case "bar": 
 									G.innerHTML += '<div id="d" style="height:' + d[i] + 'px;background-color:red;width:20px;position:absolute;margin-top:-' + (d[i]+1) +  'px;margin-left:'+ (20*count+20+p*count) +'px;margin-right:' + p + 'px;">&nbsp;</div>';
+									G.innerHTML += '<div id="d" style="width:20px;position:absolute;margin-top:-' + (d[i]+20) +  'px;margin-left:'+ (20*count+20+p*count) +'px;margin-right:' + p + 'px;">' + (d[i]) + '</div>';
+									
 									break;
 								case "line": 
 									break;
