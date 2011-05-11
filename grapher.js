@@ -36,14 +36,14 @@ if (typeof Object.create != 'function'){
 			if(!d)	{m(mp,G);return false;}
 			G.innerHTML = "<div id='chart' style='margin-left:15px;z-index:99;'></div>";
 			c = document.getElementById("chart");
-			c.style.width = (rI(o.width) - 30);
-			c.style.height = (rI(o.height) - 30);
+			c.style.width = (rI(o.width) - 30)+"px";
+			c.style.height = (rI(o.height) - 30)+"px";
 			c.style.borderBottom = c.style.borderLeft = "1px solid " + o.borderColor;
 			//add axis
-			gT = -((rI(o.height)-15) / 2)
+			gT = ((rI(o.height)-15) / 2)
 			gL = rI(o.width) / 2
 			for (i=0;i<=1;i++){
-				G.innerHTML += '<div id="axis%" style="position:absolute;margin-top:' + (gT*i) + 'px;margin-left:' + ((gL)-(gL*i)) + 'px;">%</div>'.replace(/%/gi, A[i])
+				G.innerHTML += '<div id="axis%" style="position:absolute;margin-top:-' + (gT*i) + 'px;margin-left:' + ((gL)-(gL*i)) + 'px;">%</div>'.replace(/%/gi, A[i])
 			}
             //add gridlines
             if(o.gridlines){
