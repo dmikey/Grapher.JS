@@ -5,9 +5,9 @@ return size;};var mp="missing param",c
 var G=document.getElementById(g);if(G){if(!o){m(mp,G);return false;}
 var A=[o.x,o.y]
 G.style.width=o.width;G.style.height=o.height;G.style.overflow="hidden";if(!d){m(mp,G);return false;}
-G.innerHTML="<div id='chart' style='margin-left:15px;z-index:99;'></div>";c=document.getElementById("chart");c.style.width=(rI(o.width)-30);c.style.height=(rI(o.height)-30);c.style.borderBottom=c.style.borderLeft="1px solid "+o.borderColor;gT=-((rI(o.height)-15)/2)
+G.innerHTML="<div id='chart' style='margin-left:15px;z-index:99;'></div>";c=document.getElementById("chart");c.style.width=(rI(o.width)-30)+"px";c.style.height=(rI(o.height)-30)+"px";c.style.borderBottom=c.style.borderLeft="1px solid "+o.borderColor;gT=((rI(o.height)-15)/2)
 gL=rI(o.width)/2
-for(i=0;i<=1;i++){G.innerHTML+='<div id="axis%" style="position:absolute;margin-top:'+(gT*i)+'px;margin-left:'+((gL)-(gL*i))+'px;">%</div>'.replace(/%/gi,A[i])}
+for(i=0;i<=1;i++){G.innerHTML+='<div id="axis%" style="position:absolute;margin-top:-'+(gT*i)+'px;margin-left:'+((gL)-(gL*i))+'px;">%</div>'.replace(/%/gi,A[i])}
 if(o.gridlines){totalLines=parseInt(o.height)/20;for(i=1;i<=totalLines-2;i++){G.innerHTML+='<div style="border-bottom:1px solid #999;position:absolute;margin-left:15px;margin-top:-'+i*20+'px;height:5px;width:'+c.style.width+';"></div>'}}
 count=0
 if(!o.type){m("need chart type",G);return false;}
