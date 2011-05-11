@@ -1,6 +1,7 @@
+<!DOCTYPE html> 
 <html>
 <head>
-<script type="text/javascript" src="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher-min.js"></script>
+<script type="text/javascript" src="grapher.js"></script>
 
 </head>
 <body>
@@ -12,8 +13,16 @@
 
 
 <script type="text/javascript">
-	data = {"1":500,"2":200,"3":200,"4":120,"5":120}
-	options = {"borderColor":"#000","width":"300px","height":"300px","type":"bar"}
+	data = {"1":500,"2":200,"3":200,"4":120,"5":120,"6":120}
+	options =   {"borderColor":"#000",
+    "width":"300px",
+    "height":"150px",
+    "type":"bar",
+    "x": "Customers",
+    "y":"$",
+    "ymax":800,
+    "gridlines":true    
+    }
 	grapher.graph("test",data,options);
 </script>
 
