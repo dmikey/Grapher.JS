@@ -17,8 +17,6 @@ if (typeof Object.create != 'function'){
 
 !function(grapher, document){
   grapher.graph = function (g,d,o){
-		//messages
-		
 		Object.size = function(obj) {
 				var size = 0, key;
 				for (key in obj) {
@@ -28,16 +26,15 @@ if (typeof Object.create != 'function'){
 			};
 		var mp = "missing param",c
 		var G = document.getElementById(g);
-		
-		var A = ["X","Y"]
 		if (G) {
 			if(!o)	{m(mp,G);return false;}
+            var A = [o.x,o.y]
 			//setup the graph area
 			G.style.width = o.width;
 			G.style.height = o.height;
 			G.style.overflow = "hidden";
 			if(!d)	{m(mp,G);return false;}
-			G.innerHTML = "<div id='chart' style='margin-left:15px;'></div>";
+			G.innerHTML = "<div id='chart' style='margin-left:15px;z-index:99;'></div>";
 			c = document.getElementById("chart");
 			c.style.width = (rI(o.width) - 30);
 			c.style.height = (rI(o.height) - 30);
@@ -48,6 +45,13 @@ if (typeof Object.create != 'function'){
 			for (i=0;i<=1;i++){
 				G.innerHTML += '<div id="axis%" style="position:absolute;margin-top:' + (gT*i) + 'px;margin-left:' + ((gL)-(gL*i)) + 'px;">%</div>'.replace(/%/gi, A[i])
 			}
+            //add gridlines
+            if(o.gridlines){
+                totalLines = parseInt(o.height)/20; 
+                for (i=1;i<=totalLines-2;i++){
+				G.innerHTML += '<div style="border-bottom:1px solid #999;position:absolute;margin-left:15px;margin-top:-' + i*20 + 'px;height:5px;width:' + c.style.width + ';"></div>'
+			}
+            }
 			//plot the data
 			count = 0
 			if(!o.type){m("need chart type",G);return false;}
@@ -56,9 +60,11 @@ if (typeof Object.create != 'function'){
 					   if (d.hasOwnProperty(i)){
 							switch (o.type) {
 								case "bar": 
-									G.innerHTML += '<div id="d" style="height:' + d[i] + 'px;background-color:' + color() + ';width:20px;position:absolute;margin-top:-' + (d[i]+1) +  'px;margin-left:'+ (20*count+20+p*count) +'px;margin-right:' + p + 'px;"></div>';
-									G.innerHTML += '<div id="d" style="width:20px;position:absolute;margin-top:-' + (d[i]+20) +  'px;margin-left:'+ (20*count+20+p*count) +'px;margin-right:' + p + 'px;">' + (d[i]) + '</div>';								
-									break;
+                                    var hT = (parseInt(o.height)/o.ymax);   
+									G.innerHTML += '<div class="d" style="height:' + (d[i]*hT) + 'px;background-color:' + color() + ';width:20px;position:absolute;margin-top:-' + (d[i]+1)*hT +  'px;margin-left:'+ (20*count+20+p*count) +'px;margin-right:' + p + 'px;"></div>';
+									G.innerHTML += '<div class="d" style="width:20px;position:absolute;margin-top:-' + (d[i]*hT+20) +  'px;margin-left:'+ (20*count+20+p*count) +'px;margin-right:' + p + 'px;text-align:center;">' + d[i] + '</div>';                                    
+									addCss(".d:hover{background-color:#fff;}");
+                                    break;
 								case "line": 
 									break;
 							}
@@ -80,6 +86,15 @@ if (typeof Object.create != 'function'){
   function rI(i){
 	return parseInt(i);
   }
-
+function addCss(cssCode) {
+var styleElement = document.createElement("style");
+  styleElement.type = "text/css";
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = cssCode;
+  } else {
+    styleElement.appendChild(document.createTextNode(cssCode));
+  }
+  document.getElementsByTagName("head")[0].appendChild(styleElement);
+}
 
 }(grapher,document);
