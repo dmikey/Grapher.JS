@@ -7,24 +7,22 @@
 <body>
 
 
-<div id="test" style="margin-left:20px;height:300px;">&nbsp;</div>
+<div id="test" style="margin-left:20px;font:70% Arial, Helvetica, sans-serif;line-height:180%;">&nbsp;</div>
 
-
-
-
-<script type="text/javascript">
-	data = {"1":500,"2":200,"3":200,"4":120,"5":120,"6":120}
+ 
+<script type="text/javascript"> 
+	data = {"1":100,"2":98,"3":75,"4":60,"5":10}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
     "type":"bar",
-    "x": "Customers",
-    "y":"$",
     "ymax":800,
-    "gridlines":true    
+    "gridlines":true,
+	"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
 	grapher.graph("test",data,options);
-</script>
+</script> 
 
 
 </body>
