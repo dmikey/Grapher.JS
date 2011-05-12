@@ -34,7 +34,7 @@ if (typeof Object.create != 'function'){
 					   if (d.hasOwnProperty(i)){
 							switch (o.type) {
 								case "bar": 
-									h += '<dd class="p40"><span style="height:'+  d[i] +'%;"><b>'+ d[i] +'</b></span></dd>'
+									h += '<dd><span style="height:'+  d[i] +'%;"><b>'+ d[i] +'</b></span></dd>'
                                     break;
 								case "line": 
 									break;
@@ -48,7 +48,7 @@ if (typeof Object.create != 'function'){
 
 			//xaxis
 			G.innerHTML += axis('x',o); 
-		    G.innerHTML += '<style>ul.xaxis{clear:left;display:inline;float:left;margin:0 0 0 27px;padding:0;width:454px}ul.yaxis{display:inline;float:left;margin:14px 0 0;padding:0}ul.xaxis li{float:left;list-style:none;text-align:center;width:33px}ul.yaxis li{clear:left;float:left;height:33px;list-style:none;text-align:right}dl#csschart,dl#csschart dt,dl#csschart dd{margin:0;padding:0}dl#csschart{float:left;height:360px;padding-left:11px;width:454px}dl#csschart dt{display:none}dl#csschart dd{display:inline;float:left;height:330px;margin-top:22px;position:relative;width:33px}dl#csschart span{background:#aaa;bottom:0;color:#555;display:block;height:50%;left:0;position:absolute;text-decoration:none;width:33px;z-index:1}dl#csschart span b{color:#fff;display:block;float:left;font-style:normal;font-weight:700;left:3px;line-height:200%;position:absolute;text-align:center;top:5px;width:23px}dl#csschart .sub{margin-left:-33px}dl#csschart .sub span{background:#000}</style>'
+		    G.innerHTML += '<style type="text/css" media="screen">ul.xAxis{margin:0 0 0 27px;padding:0;float:left;clear:left;display:inline;width:454px;}ul.yAxis{margin:14px 0 0 0;padding:0;display:inline;float:left;}ul.xAxis li{float:left; list-style:none;width:33px;text-align:center;}ul.yAxis li{	list-style:none;	height:33px;	text-align:right;	float:left;	clear:left;}dl#csschart, dl#csschart dt, dl#csschart dd{	margin:0;	padding:0;	} 	dl#csschart{width:454px;	height:360px;	padding-left:11px;	float:left;	} dl#csschart dt{	display:none;	}dl#csschart dd{	position:relative;	float:left;	display:inline;	width:33px;	height:330px;	margin-top:22px;			} dl#csschart span{	position:absolute;	display:block;	width:33px;		bottom:0;	left:0;		z-index:1;	color:#555;	text-decoration:none;	} 		dl#csschart span b{	display:block;	font-weight:bold;	font-style:normal;	float:left;	line-height:200%;	color:#fff;	position:absolute;	top:5px;	left:3px;	text-align:center;	width:23px;	} 		/* default column styling */			dl#csschart span{		height:50%;		background:#ddd;		} dl#csschart .sub{	margin-left:-33px;	}dl#csschart .sub span{	background:#eee;}</style>'
 		}
   }
   //often used calls, made smaller
