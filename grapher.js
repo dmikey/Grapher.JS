@@ -17,84 +17,54 @@ if (typeof Object.create != 'function'){
 
 !function(grapher, document){
   grapher.graph = function (g,d,o){
-		Object.size = function(obj) {
-				var size = 0, key;
-				for (key in obj) {
-					if (obj.hasOwnProperty(key)) size++;
-				}
-				return size;
-			};
 		var mp = "missing param",c
 		var G = document.getElementById(g);
 		if (G) {
 			if(!o)	{m(mp,G);return false;}
-            var A = [o.x,o.y]
 			//setup the graph area
-			G.style.width = o.width;
-			G.style.height = o.height;
-			G.style.overflow = "hidden";
 			if(!d)	{m(mp,G);return false;}
-			G.innerHTML = "<div id='chart' style='margin-left:15px;z-index:99;'></div>";
-			c = document.getElementById("chart");
-			c.style.width = (rI(o.width) - 30)+"px";
-			c.style.height = (rI(o.height) - 30)+"px";
-			c.style.borderBottom = c.style.borderLeft = "1px solid " + o.borderColor;
-			//add axis
-			gT = ((rI(o.height)-15) / 2)
-			gL = rI(o.width) / 2
-			for (i=0;i<=1;i++){
-				G.innerHTML += '<div id="axis%" style="position:absolute;margin-top:-' + (gT*i) + 'px;margin-left:' + ((gL)-(gL*i)) + 'px;">%</div>'.replace(/%/gi, A[i])
-			}
-            //add gridlines
-            if(o.gridlines){
-                totalLines = parseInt(o.height)/20; 
-                for (i=1;i<=totalLines-2;i++){
-				G.innerHTML += '<div style="border-bottom:1px solid #999;position:absolute;margin-left:15px;margin-top:-' + i*20 + 'px;height:5px;width:' + c.style.width + ';"></div>'
-			}
-            }
+			//yaxis
+			G.innerHTML += axis('y',o); 
 			//plot the data
 			count = 0
+			h = '<dl id="csschart">' ;	
 			if(!o.type){m("need chart type",G);return false;}
-				var p = 10;
+				
 				for (var i in d) {
 					   if (d.hasOwnProperty(i)){
 							switch (o.type) {
 								case "bar": 
-                                    var hT = (parseInt(o.height)/o.ymax);   
-									G.innerHTML += '<div class="d" style="height:' + (d[i]*hT) + 'px;background-color:' + color() + ';width:20px;position:absolute;margin-top:-' + (d[i]+1)*hT +  'px;margin-left:'+ (20*count+20+p*count) +'px;margin-right:' + p + 'px;"></div>';
-									G.innerHTML += '<div class="d" style="width:20px;position:absolute;margin-top:-' + (d[i]*hT+20) +  'px;margin-left:'+ (20*count+20+p*count) +'px;margin-right:' + p + 'px;text-align:center;">' + d[i] + '</div>';                                    
-									addCss(".d:hover{background-color:#fff;}");
+									h += '<dd class="p40"><span style="height:'+  d[i] +'%;"><b>'+ d[i] +'</b></span></dd>'
                                     break;
 								case "line": 
 									break;
 							}
 			
 			   };
-			   count++	
+			   
 			}
-				
+			h += '</dl> '
+			G.innerHTML += h
+
+			//xaxis
+			G.innerHTML += axis('x',o); 
+		    G.innerHTML += '<style>ul.xaxis{clear:left;display:inline;float:left;margin:0 0 0 27px;padding:0;width:454px}ul.yaxis{display:inline;float:left;margin:14px 0 0;padding:0}ul.xaxis li{float:left;list-style:none;text-align:center;width:33px}ul.yaxis li{clear:left;float:left;height:33px;list-style:none;text-align:right}dl#csschart,dl#csschart dt,dl#csschart dd{margin:0;padding:0}dl#csschart{float:left;height:360px;padding-left:11px;width:454px}dl#csschart dt{display:none}dl#csschart dd{display:inline;float:left;height:330px;margin-top:22px;position:relative;width:33px}dl#csschart span{background:#aaa;bottom:0;color:#555;display:block;height:50%;left:0;position:absolute;text-decoration:none;width:33px;z-index:1}dl#csschart span b{color:#fff;display:block;float:left;font-style:normal;font-weight:700;left:3px;line-height:200%;position:absolute;text-align:center;top:5px;width:23px}dl#csschart .sub{margin-left:-33px}dl#csschart .sub span{background:#000}</style>'
 		}
   }
   //often used calls, made smaller
+  function axis(a,o){
+  				h = '<ul class="' + a + 'Axis">';
+					for (x=0;x<=o[ a + "units"].length-1;x++){
+						h += '<li>' + o[ a + "units"][x] + '</li>';
+					}
+				h += '</ul>';
+				return h;
+  }
   function m(t,g){
 	g.innerHTML  = t;
-  }
-  function color(){
-	var C = ["red","blue","green","yellow","purple"]
-	return C [Math.floor(Math.random()*C.length)]
   }
   function rI(i){
 	return parseInt(i);
   }
-function addCss(cssCode) {
-var styleElement = document.createElement("style");
-  styleElement.type = "text/css";
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = cssCode;
-  } else {
-    styleElement.appendChild(document.createTextNode(cssCode));
-  }
-  document.getElementsByTagName("head")[0].appendChild(styleElement);
-}
 
 }(grapher,document);
