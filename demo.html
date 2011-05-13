@@ -1,28 +1,50 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <script type="text/javascript" src="grapher.js"></script>
+<style>
+body{text-align:center;}
+
+</style>
 
 </head>
 
 <body>
-
-<div id="test" style="margin-left:20px;font:70% Arial, Helvetica, sans-serif;line-height:180%;">&nbsp;</div>
+<a href="http://github.com/you"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
+<div style="margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;line-height:50px;">grapher.js<br/><span style="font-size:30%;">a micro js charting framework</span><br/><br/><span style="font-size:20%;line-height:0px;">grapher.js is under 5Kb, and brings you full featured 2D graphs.<br/>grapher.js requires no external libraries, images, or css<br/>grapher.js requires only 1 http call or you could inline the whole thing!<br/>grapher.js works practically everywhere!<br/>grapher.js is FREE!</span><br/><br/></div>
+<div id="test" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
 
 <script type="text/javascript"> 
-	data = {"1":100,"2":98,"3":75,"4":60,"5":10}
+	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
-    "type":"bar",
+    "ymax":800,
+    "gridlines":true,
+	"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"],
+	"orientation":"horizontal"
+    }
+	grapher.bar("test",data,options);
+</script> 
+<div style="clear:both;">&nbsp;</div>
+
+<div id="test2" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
+
+<script type="text/javascript"> 
+	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
+	options =   {"borderColor":"#000",
+    "width":"300px",
+    "height":"150px",
     "ymax":800,
     "gridlines":true,
 	"yunits":["100","90","80","70","60","50","40","30","20","10"],
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
-	grapher.graph("test",data,options);
+	grapher.bar("test2",data,options);
 </script> 
 
+<div style="clear:both;">&nbsp;</div><br/><br/><br/>
 </body>
 
 </html>
