@@ -15,7 +15,24 @@ body{text-align:center;}
 <div id="test" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
 
 <script type="text/javascript"> 
-	data = {"1":[100,30,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
+	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
+	options =   {"borderColor":"#000",
+    "width":"300px",
+    "height":"150px",
+    "ymax":800,
+    "gridlines":true,
+	"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"],
+	"orientation":"horizontal"
+    }
+	grapher.bar("test",data,options);
+</script> 
+<div style="clear:both;">&nbsp;</div>
+
+<div id="test2" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
+
+<script type="text/javascript"> 
+	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -24,17 +41,10 @@ body{text-align:center;}
 	"yunits":["100","90","80","70","60","50","40","30","20","10"],
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
-	grapher.bar("test",data,options);
+	grapher.bar("test2",data,options);
 </script> 
-<br/><br/>
-<div style="text-align:justify;margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;line-height:25px;">
-<span style="font-size:20%;line-height:0px;">
 
-grapher.js is currently <b>1,898 bytes</b> minified and only <b>900 bytes</b> with gzipped. I am always working to trim the fat out the library as much as I can. Most of the weight
-is going to css to keep the framework independent of external resources.
-
-</span><br/><br/></div>
-
+<div style="clear:both;">&nbsp;</div><br/><br/><br/>
 </body>
 
 </html>
