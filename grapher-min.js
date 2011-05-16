@@ -1,39 +1,7 @@
-if(typeof Object.create!='function'){Object.create=function(o){function F(){}
-F.prototype=o
-return new F}}!function(window){var grapher=window.grapher={}}(window);var hz="h";!function(grapher,document){grapher.bar=function(g,d,o){var mp="missing param",c
-var G=document.getElementById(g);mkLin(0,10,20,25,G);if(G){if(!o||!d){m(mp,G);return false;}
-m(axis('y',o),G);var ddW=33,ddH=330,sH='50%',sW='33px',om='left',lm1='top',lm2='left',mt='22px',gh='height'
-if(o.style==hz){var ddW=330,ddH=33,sH='33px',sW='50%',om='top',lm1='right',lm2='top',mt='0px',gh='width'}
-guid='d'+gid();h='<dl id="'+guid+'">';for(var i in d){if(d.hasOwnProperty(i)){s=d[i]
-if(s.length>1){s=s[0]}
-h+='<dd><span style="'+gh+':'+s+'%;"><b>'+s+'</b></span></dd>'
-if(d[i].length>1){for(b=1;b<d[i].length;b++){h+='<dd class="sub" ><span style="'+gh+':'+d[i][b]+'%;"><b>'+d[i][b]+'</b></span></dd> '}}};}
-m(h+'</dl>'+axis('x',o)+'<style>ul.xAxis{float:left;clear:left;display:inline;width:454px;margin:0 0 0 27px;padding:0} ul.yAxis{display:inline;float:left;margin:14px 0 0;padding:0} ul.xAxis li{float:left;list-style:none;width:33px;text-align:center} ul.yAxis li{list-style:none;height:33px;text-align:right;float:left;clear:left} dl#'+guid+',dl#'+guid+' dt,dl#'+guid+' dd{margin:0;padding:0} dl#'+guid+'{width:454px;height:360px;padding-left:11px;float:left} dl#'+guid+' dd{position:relative;display:block;float:left;width:'+ddW+'px;height:'+ddH+'px;margin-top:'+mt+';} dl#'+guid+' span{position:absolute;display:block;width:'+sW+';bottom:0;left:0;z-index:1;color:#555;text-decoration:none;height:'+sH+';background:#456} dl#'+guid+' span b{display:block;font-weight:700;font-style:normal;float:left;line-height:200%;color:#fff;position:absolute;'+lm1+':5px;'+lm2+':3px;text-align:right;width:23px} dl#'+guid+' .sub{margin-'+om+':-33px} dl#'+guid+' .sub span{background:#978}</style>',G);}}
-function axis(a,o){h="",b=a
-if(o.style==hz){if(a=="y"){a="x"}else{a="y"}}
-for(x=0;x<=o[a+"units"].length-1;x++){if(o.style==hz){h='<li>'+o[a+"units"][x]+'</li>'+h;}
-else{h+='<li>'+o[a+"units"][x]+'</li>';}}
-return'<ul class="'+b+'Axis">'+h+'</ul>';}}(grapher,document);function m(t,g){g.innerHTML+=t;}
-function rI(i){return parseInt(i);}
-function gid(){var S4=function(){return(((1+Math.random())*0x10000)|0).toString(16).substring(1);};return(S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());}
-function mD(x,y,w,h,g)
-{g.innerHTML+='<div style="position:absolute;'+'left:'+x+'px;'+'top:'+y+'px;'+'width:'+w+'px;'+'height:'+h+'px;'+'clip:rect(0,'+w+'px,'+h+'px,0);'+'background-color:#000;"><\/div>';}
-function mkLin(x1,y1,x2,y2,g)
-{if(x1>x2)
-{var _x2=x2;var _y2=y2;x2=x1;y2=y1;x1=_x2;y1=_y2;}
-var dx=x2-x1,dy=Math.abs(y2-y1),x=x1,y=y1,yIncr=(y1>y2)?-1:1;if(dx>=dy)
-{var pr=dy<<1,pru=pr-(dx<<1),p=pr-dx,ox=x;while((dx--)>0)
-{++x;if(p>0){mD(ox,y,x-ox,1,g);y+=yIncr;p+=pru;ox=x;}
-else p+=pr;}
-mD(ox,y,x2-ox+1,1,g);}
-else
-{var pr=dx<<1,pru=pr-(dy<<1),p=pr-dy,oy=y;if(y2<=y1)
-{while((dy--)>0)
-{if(p>0){mD(x++,y,1,oy-y+1,g);y+=yIncr;p+=pru;oy=y;}
-else{y+=yIncr;p+=pr;}}
-mD(x2,y2,1,oy-y2+1,g);}
-else
-{while((dy--)>0)
-{y+=yIncr;if(p>0){this.mD(x++,oy,1,y-oy,g);p+=pru;oy=y;}
-else p+=pr;}
-mD(x2,oy,1,y2-oy+1,g);}}}
+if(typeof Object.create!="function")Object.create=function(p){function q(){}q.prototype=p;return new q};(function(p){p.grapher={}})(window);var hz="h";
+(function(p,q){function t(a,c){h="";b=a;c.style==hz&&(a=a=="y"?"x":"y");for(x=0;x<=c[a+"units"].length-1;x++)c.style==hz?h="<li>"+c[a+"units"][x]+"</li>"+h:h+="<li>"+c[a+"units"][x]+"</li>";return'<ul class="'+b+'Axis">'+h+"</ul>"}function u(){var a=function(){return((1+Math.random())*65536|0).toString(16).substring(1)};return a()+a()+"-"+a()+"-"+a()+"-"+a()+"-"+a()+a()+a()}function r(a,c,i,d,e){var m=function(a,c,d,e,f){f.innerHTML+='<div style="position:absolute;margin-left:'+a+"px;margin-top:"+
+c+"px;width:"+d+"px;height:"+e+"px;clip:rect(0,"+d+"px,"+e+'px,0);background-color:#000;"></div>'};if(a>i)var f=i,k=d,i=a,d=c,a=f,c=k;var f=i-a,k=Math.abs(d-c),j=c,o=c>d?-1:1;if(f>=k){for(var l=k<<1,n=l-(f<<1),g=l-f,c=a;f-- >0;)++a,g>0?(m(c,j,a-c,1,e),j+=o,g+=n,c=a):g+=l;m(c,j,i-c+1,1,e)}else if(l=f<<1,n=l-(k<<1),g=l-k,f=j,d<=c){for(;k-- >0;)g>0?(m(a++,j,1,f-j+1,e),j+=o,g+=n,f=j):(j+=o,g+=l);m(i,d,1,f-d+1,e)}else{for(;k-- >0;)j+=o,g>0?(m(a++,f,1,j-f,e),g+=n,f=j):g+=l;m(i,f,1,d-f+1,e)}}p.bar=function(a,
+c,i){a=q.getElementById(a);r(25,351,400,351,a);r(25,1,25,351,a);if(a){if(!i||!c)return a.innerHTML+="missing param",!1;var d=t("y",i);a.innerHTML+=d;var d=33,e=330,m="50%",f="33px",k="left",j="top",o="left",l="22px",n="height";i.style==hz&&(d=330,e=33,m="33px",f="50%",k="top",j="right",o="top",l="0px",n="width");guid="d"+u();h='<dl id="'+guid+'">';for(var g in c)if(c.hasOwnProperty(g)&&(s=c[g],s.length>1&&(s=s[0]),h+='<dd><span style="'+n+":"+s+'%;"><b>'+s+"</b></span></dd>",c[g].length>1))for(b=
+1;b<c[g].length;b++)h+='<dd class="sub" ><span style="'+n+":"+c[g][b]+'%;"><b>'+c[g][b]+"</b></span></dd> ";c=h+"</dl>"+t("x",i)+"<style>ul.xAxis{float:left;clear:left;display:inline;width:454px;margin:0 0 0 27px;padding:0} ul.yAxis{display:inline;float:left;margin:14px 0 0;padding:0} ul.xAxis li{float:left;list-style:none;width:33px;text-align:center} ul.yAxis li{list-style:none;height:33px;text-align:right;float:left;clear:left} dl#"+guid+",dl#"+guid+" dt,dl#"+guid+" dd{margin:0;padding:0} dl#"+
+guid+"{width:454px;height:360px;padding-left:11px;float:left} dl#"+guid+" dd{position:relative;display:block;float:left;width:"+d+"px;height:"+e+"px;margin-top:"+l+";} dl#"+guid+" span{position:absolute;display:block;width:"+f+";bottom:0;left:0;z-index:1;color:#555;text-decoration:none;height:"+m+";background:#456} dl#"+guid+" span b{display:block;font-weight:700;font-style:normal;float:left;line-height:200%;color:#fff;position:absolute;"+j+":5px;"+o+":3px;text-align:right;width:23px} dl#"+guid+" .sub{margin-"+
+k+":-33px} dl#"+guid+" .sub span{background:#978}</style>";a.innerHTML+=c}};p.line=function(a,c,i){a=q.getElementById(a);r(25,351,400,351,a);r(25,1,25,351,a);xoffset=25;if(a){if(!i||!c)return a.innerHTML+="missing param",!1;var d=t("y",i);a.innerHTML+=d;d=[];counter=0;for(var e in c)c.hasOwnProperty(e)&&(d[counter]=[],d[counter][0]=c[e][0]+xoffset,d[counter][1]=c[e][1],counter+=1);for(e=0;e<=d.length-1;e++)d[e+1]&&r(d[e][0],d[e][1],d[e+1][0],d[e+1][1],a);c=t("x",i);a.innerHTML+=c}}})(grapher,document);
