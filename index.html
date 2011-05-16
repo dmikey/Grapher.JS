@@ -4,16 +4,24 @@
 <script type="text/javascript" src="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher-min.js"></script>
 <style>
 body{text-align:center;}
-
+pre{text-align:left;}
 </style>
-
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" /> 
+<script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js" type="text/javascript"></script> 
+	
 </head>
 
-<body>
-<a href="http://github.com/you"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
-<div style="margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;line-height:50px;">grapher.js<br/><span style="font-size:30%;">a micro js charting framework</span><br/><br/><span style="font-size:20%;line-height:0px;">grapher.js is under 5Kb, and brings you full featured 2D graphs.<br/>grapher.js requires no external libraries, images, or css<br/>grapher.js requires only 1 http call or you could inline the whole thing!<br/>grapher.js works practically everywhere!<br/>grapher.js is FREE!</span><br/><br/></div>
-<div id="test" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
+<body  onload="prettyPrint()"> 
+<a href="http://github.com/toxigenicpoem/Grapher.JS"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
+<div style="margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;line-height:50px;">grapher.js<br/><span style="font-size:30%;">a micro js charting framework<br/>current version: 0.35<br/>3.51KB (1.45KB gzipped)</span><br/><br/><span style="font-size:20%;line-height:0px;">grapher.js is under 5Kb, and brings you full featured 2D graphs.<br/>grapher.js requires no external libraries, images, or css<br/>grapher.js does not use canvas<br/>grapher.js requires only 1 http call or you could inline the whole thing!<br/>grapher.js works practically everywhere!<br/>grapher.js is FREE!</span><br/><br/></div>
 
+
+<p style="font-size:280%;">gallery and usage guide</p>
+
+
+
+<p>Bar Graph, Horizontal Style, with Bar stack</p><div style="clear:both;">&nbsp;</div>
+<div id="test" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
 <script type="text/javascript"> 
 	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
 	options =   {"borderColor":"#000",
@@ -25,8 +33,31 @@ body{text-align:center;}
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"],
 	"style":"h"
     }
+
 	grapher.bar("test",data,options);
-</script> 
+</script>
+<div style="clear:both;">&nbsp;</div>
+<p>usage</p>
+<pre class="prettyprint">
+&lt;script type="text/javascript"&gt; 
+	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
+	options =   {"borderColor":"#000",
+    "width":"300px",
+    "height":"150px",
+    "ymax":800,
+    "gridlines":true,
+	"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"],
+	"style":"h"
+    }
+	grapher.bar("test",data,options);
+&lt;/script&gt; 
+
+</pre>
+<br/><br/>
+
+<p>Bar Graph, Vertical Style, with Bar stack</p>
+
 <div style="clear:both;">&nbsp;</div>
 
 <div id="test2" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
@@ -44,6 +75,27 @@ body{text-align:center;}
 	grapher.bar("test2",data,options);
 </script> 
 
+<div style="clear:both;">&nbsp;</div>
+
+<p>usage</p>
+<pre class="prettyprint">
+&lt;script type="text/javascript"&gt; 
+	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
+	options =   {"borderColor":"#000",
+    "width":"300px",
+    "height":"150px",
+    "ymax":800,
+    "gridlines":true,
+	"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
+    }
+	grapher.bar("test",data,options);
+&lt;/script&gt; 
+
+</pre>
+<br/><br/>
+
+<p>Line Graph</p>
 
 <div style="clear:both;">&nbsp;</div>
 
@@ -66,11 +118,73 @@ body{text-align:center;}
 
 <div style="clear:both;">&nbsp;</div><br/>
 
+
+<p>usage</p>
+<pre class="prettyprint">
+&lt;script type="text/javascript"&gt; 
+	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],"7":[125,155],"8":[185,15],"9":[300,300]}
+	options =   {"borderColor":"#000",
+    "width":"300px",
+    "height":"150px",
+    "ymax":800,
+    "gridlines":true,
+	"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
+    }
+	grapher.line("test3",data,options);
+&lt;/script&gt; 
+
+</pre>
+<br/><br/>
+
+
+
+<p>Plotter Graph</p>
+
+<div style="clear:both;">&nbsp;</div>
+
+<div id="test4" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
+
+<script type="text/javascript"> 
+	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],"7":[125,155],"8":[185,15],"9":[300,300]}
+	options =   {"borderColor":"#000",
+    "width":"300px",
+    "height":"150px",
+    "ymax":800,
+    "gridlines":true,
+	"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
+    }
+	grapher.plot("test4",data,options);
+</script> 
+
+
+
+<div style="clear:both;">&nbsp;</div><br/>
+
+<p>usage</p>
+<pre class="prettyprint">
+&lt;script type="text/javascript"&gt; 
+	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],"7":[125,155],"8":[185,15],"9":[300,300]}
+	options =   {"borderColor":"#000",
+    "width":"300px",
+    "height":"150px",
+    "ymax":800,
+    "gridlines":true,
+	"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
+    }
+	grapher.plot("test4",data,options);
+&lt;/script&gt; 
+
+</pre>
+<br/><br/>
+
+
 <div style="text-align:justify;margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;line-height:25px;">
 <span style="font-size:20%;line-height:0px;">
 
-grapher.js is currently <b>3,175 bytes</b> minified and only <b>1,519 bytes</b> gzipped.
-is going to css to keep the framework independent of external resources.
+
 
 </span>
 <br/><br/></div>
