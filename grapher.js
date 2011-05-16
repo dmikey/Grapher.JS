@@ -43,7 +43,7 @@ var hz = "h";
 										}
 			   };
 			}
-			m(h + '</dl>' + axis('x',o) + '<style>ul.xAxis{float:left;clear:left;display:inline;width:454px;margin:0 0 0 27px;padding:0} ul.yAxis{display:inline;float:left;margin:14px 0 0;padding:0} ul.xAxis li{float:left;list-style:none;width:33px;text-align:center} ul.yAxis li{list-style:none;height:33px;text-align:right;float:left;clear:left} dl#'+guid+',dl#'+guid+' dt,dl#'+guid+' dd{margin:0;padding:0} dl#'+guid+'{width:454px;height:360px;padding-left:11px;float:left} dl#'+guid+' dd{position:relative;display:block;float:left;width:' + ddW + 'px;height:' + ddH + 'px;margin-top:' + mt + ';} dl#'+guid+' span{position:absolute;display:block;width:' + sW + ';bottom:0;left:0;z-index:1;color:#555;text-decoration:none;height:' + sH + ';background:#456} dl#'+guid+' span b{display:block;font-weight:700;font-style:normal;float:left;line-height:200%;color:#fff;position:absolute;' + lm1 + ':5px;' + lm2 + ':3px;text-align:right;width:23px} dl#'+guid+' .sub{margin-' + om + ':-33px} dl#'+guid+' .sub span{background:#978}</style>',G);
+			m(h + '</dl>' + axis('x',o) + '<style>ul.xAxis{float:left;clear:left;display:inline;width:454px;margin:0 0 0 27px;padding:0} ul.yAxis{display:inline;float:left;margin:14px 0 0;padding:0;height:370px;} ul.xAxis li{float:left;list-style:none;width:33px;text-align:center} ul.yAxis li{list-style:none;height:33px;text-align:right;float:left;clear:left} dl#'+guid+',dl#'+guid+' dt,dl#'+guid+' dd{margin:0;padding:0} dl#'+guid+'{width:454px;height:360px;padding-left:11px;float:left} dl#'+guid+' dd{position:relative;display:block;float:left;width:' + ddW + 'px;height:' + ddH + 'px;margin-top:' + mt + ';} dl#'+guid+' span{position:absolute;display:block;width:' + sW + ';bottom:0;left:0;z-index:1;color:#555;text-decoration:none;height:' + sH + ';background:#456} dl#'+guid+' span b{display:block;font-weight:700;font-style:normal;float:left;line-height:200%;color:#fff;position:absolute;' + lm1 + ':5px;' + lm2 + ':3px;text-align:right;width:23px} dl#'+guid+' .sub{margin-' + om + ':-33px} dl#'+guid+' .sub span{background:#978}</style>',G);
 		}
   }
  grapher.line = function (g,d,o){
@@ -77,6 +77,40 @@ var hz = "h";
 			m(axis('x',o),G);
 		}
   }
+  
+ grapher.plot = function (g,d,o){
+		var mp = "missing param",c
+		var G = document.getElementById(g);
+		//axis lines
+		mkLin(25,351,400,351,G);
+		mkLin(25,1,25,351,G);
+		xoffset = 25
+		if (G) {
+			if(!o||!d)	{m(mp,G);return false;}
+			//yaxis
+			m(axis('y',o),G);
+			var plotPoints = new Array()
+			//plot the data
+			counter = 0
+			for (var i in d) {
+					   if (d.hasOwnProperty(i)){	
+					    plotPoints[counter] = new Array();
+						plotPoints[counter][0] = d[i][0] + xoffset;
+						plotPoints[counter][1] = d[i][1];
+					    counter += 1
+					   
+					   }}
+			for (i=0;i<=plotPoints.length-1;i++){
+			if(plotPoints[i]){
+					mD(plotPoints[i][0], plotPoints[i][1], 4, 4, G);
+				}
+			}
+			
+			m(axis('x',o),G);
+		}
+  }
+  
+  
   //often used calls, made smaller
   function axis(a,o){
   				h = "",	b = a
@@ -89,7 +123,7 @@ var hz = "h";
   }
   
 //drawing library
-//most of this code borrowed from: CITE SOURCE
+//some of this code borrowed from: CITE SOURCE
 function m(t,g){g.innerHTML += t;}
 function rI(i){return parseInt(i);}
 function gid() {
@@ -98,12 +132,10 @@ function gid() {
     };
     return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
-
+function mD(x, y, w, h, g){g.innerHTML  += '<div style="position:absolute;'+'margin-left:' + x + 'px;'+'margin-top:' + y + 'px;'+'width:' + w + 'px;'+'height:' + h + 'px;'+'clip:rect(0,'+w+'px,'+h+'px,0);'+'background-color:#000;"><\/div>';}
 function mkLin(x1, y1, x2, y2,g)
 {
 
-
-	var mD = function(x, y, w, h, g){g.innerHTML  += '<div style="position:absolute;'+'margin-left:' + x + 'px;'+'margin-top:' + y + 'px;'+'width:' + w + 'px;'+'height:' + h + 'px;'+'clip:rect(0,'+w+'px,'+h+'px,0);'+'background-color:#000;"><\/div>';}
 	if (x1 > x2)
 	{
 		var _x2 = x2;var _y2 = y2;x2 = x1;y2 = y1;x1 = _x2;y1 = _y2;
