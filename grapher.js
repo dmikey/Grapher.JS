@@ -49,10 +49,45 @@ var hz = "h";
  grapher.line = function (g,d,o){
 		var mp = "missing param",c
 		var G = document.getElementById(g);
+		xoffset = 25
 		//axis lines
 		mkLin(25,351,400,351,G);
 		mkLin(25,1,25,351,G);
+		
+		if (G) {
+			if(!o||!d)	{m(mp,G);return false;}
+			//yaxis
+			m(axis('y',o),G);
+			var plotPoints = new Array()
+			//plot the data
+			counter = 0
+			for (var i in d) {
+					   if (d.hasOwnProperty(i)){	
+					    plotPoints[counter] = new Array();
+						plotPoints[counter][0] = d[i][0] + xoffset;
+						plotPoints[counter][1] = d[i][1];
+					    counter += 1
+					   
+					   }}
+			for (i=0;i<=plotPoints.length-1;i++){
+			if(plotPoints[i+1]){
+					mkLin(plotPoints[i][0],plotPoints[i][1],plotPoints[i+1][0],plotPoints[i+1][1],G);
+				}
+			}
+			
+			m(axis('x',o),G);
+		}
+  }
+  
+ grapher.area = function (g,d,o){
+		var mp = "missing param",c
+		var G = document.getElementById(g);
 		xoffset = 25
+		fillPolygon(new Array(1+25,25,25+25,55+25,75+25,125+25,185+25,300+25,325), new Array(351,1,75,65,105,155,15,300,351),G);
+		//axis lines
+		mkLin(25,351,400,351,G);
+		mkLin(25,1,25,351,G);
+		
 		if (G) {
 			if(!o||!d)	{m(mp,G);return false;}
 			//yaxis
@@ -81,6 +116,8 @@ var hz = "h";
  grapher.plot = function (g,d,o){
 		var mp = "missing param",c
 		var G = document.getElementById(g);
+	
+		
 		//axis lines
 		mkLin(25,351,400,351,G);
 		mkLin(25,1,25,351,G);
@@ -111,8 +148,8 @@ var hz = "h";
   }
   
   
-  //often used calls, made smaller
-  function axis(a,o){
+
+ function axis(a,o){
   				h = "",	b = a
 				if(o.style == hz){if(a=="y"){a="x"}else{a="y"}}
 				for (x=0;x<=o[ a + "units"].length-1;x++){
@@ -178,5 +215,80 @@ function mkLin(x1, y1, x2, y2,g)
 			mD(x2, oy, 1, y2-oy+1,g);
 		}
 	}
-}  
+}
+function integer_compare(x,y)
+{
+	return (x < y) ? -1 : ((x > y)*1);
+}
+	this.fillPolygon = function(array_x, array_y,g)
+	{
+		var i;
+		var y;
+		var miny, maxy;
+		var x1, y1;
+		var x2, y2;
+		var ind1, ind2;
+		var ints;
+
+		var n = array_x.length;
+
+		if (!n) return;
+
+
+		miny = array_y[0];
+		maxy = array_y[0];
+		for (i = 1; i < n; i++)
+		{
+			if (array_y[i] < miny)
+				miny = array_y[i];
+
+			if (array_y[i] > maxy)
+				maxy = array_y[i];
+		}
+		for (y = miny; y <= maxy; y++)
+		{
+			var polyInts = new Array();
+			ints = 0;
+			for (i = 0; i < n; i++)
+			{
+				if (!i)
+				{
+					ind1 = n-1;
+					ind2 = 0;
+				}
+				else
+				{
+					ind1 = i-1;
+					ind2 = i;
+				}
+				y1 = array_y[ind1];
+				y2 = array_y[ind2];
+				if (y1 < y2)
+				{
+					x1 = array_x[ind1];
+					x2 = array_x[ind2];
+				}
+				else if (y1 > y2)
+				{
+					y2 = array_y[ind1];
+					y1 = array_y[ind2];
+					x2 = array_x[ind1];
+					x1 = array_x[ind2];
+				}
+				else continue;
+
+				 // modified 11. 2. 2004 Walter Zorn
+				if ((y >= y1) && (y < y2))
+					polyInts[ints++] = Math.round((y-y1) * (x2-x1) / (y2-y1) + x1);
+
+				else if ((y == maxy) && (y > y1) && (y <= y2))
+					polyInts[ints++] = Math.round((y-y1) * (x2-x1) / (y2-y1) + x1);
+			}
+			polyInts.sort(integer_compare);
+			for (i = 0; i < ints; i+=2)
+				mD(polyInts[i], y, polyInts[i+1]-polyInts[i]+1, 1,g);
+		}
+	};
+
+	
 }(grapher,document);
