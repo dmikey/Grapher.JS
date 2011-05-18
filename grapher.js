@@ -1,32 +1,14 @@
 /*!
-  * grapher.js (c) Derek Anderson
-  * https://github.com/toxigenicpoem/grapher
-  * LGPL 2.1 License
-  * Code inspired or borrowed from Thomas Fuchs, Walter Zorn
+  * grapher.js (c) Derek Anderson http://www.twitter.com/toxigenicpoem
+  * https://github.com/toxigenicpoem/Grapher.JS
+  * LGPL/MIT License
+  * Code inspired and/or borrowed from Thomas Fuchs, Walter Zorn
 	Performance optimizations for Internet Explorer
 	by Thomas Frank and John Holdsworth.
 	fillPolygon method implemented by Matthieu Haller.
 	fillArc method implimented by Balamurugan S
-	
-	
-	LICENSE: LGPL
-
-	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Lesser General Public
-	License (LGPL) as published by the Free Software Foundation; either
-	version 2.1 of the License, or (at your option) any later version.
-
-	This library is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Lesser General Public License for more details.
-
-	You should have received a copy of the GNU Lesser General Public
-	License along with this library; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA,
-	or see http://www.gnu.org/copyleft/lesser.html
-
 */
+hz="h"
 
 if (typeof Object.create != 'function'){
   Object.create = function (o){
@@ -35,13 +17,65 @@ if (typeof Object.create != 'function'){
     return new F
   }
 }
+
 !function(window){
   var grapher = window.grapher = {}
 }(window);
-hz="h"
+
+!function(grapher, container){
+  var parseEl = document.createElement('div'),
+    props = ('backgroundColor borderBottomColor borderBottomWidth borderLeftColor borderLeftWidth '+
+    'borderRightColor borderRightWidth borderSpacing borderTopColor borderTopWidth bottom color fontSize '+
+    'fontWeight height left letterSpacing lineHeight marginBottom marginLeft marginRight marginTop maxHeight '+
+    'maxWidth minHeight minWidth opacity outlineColor outlineOffset outlineWidth paddingBottom paddingLeft '+
+    'paddingRight paddingTop right textIndent top width wordSpacing zIndex').split(' ');
+
+  function interpolate(source,target,pos){ return (source+(target-source)*pos).toFixed(3); }
+  function s(str, p, c){ return str.substr(p,c||1); }
+  function color(source,target,pos){
+    var i = 2, j, c, tmp, v = [], r = [];
+    while(j=3,c=arguments[i-1],i--)
+      if(s(c,0)=='r') { c = c.match(/\d+/g); while(j--) v.push(~~c[j]); } else {
+        if(c.length==4) c='#'+s(c,1)+s(c,1)+s(c,2)+s(c,2)+s(c,3)+s(c,3);
+        while(j--) v.push(parseInt(s(c,1+j*2,2), 16)); }
+    while(j--) { tmp = ~~(v[j+3]+(v[j]-v[j+3])*pos); r.push(tmp<0?0:tmp>255?255:tmp); }
+    return 'rgb('+r.join(',')+')';
+  }
+  
+  function parse(prop){
+    var p = parseFloat(prop), q = prop.replace(/^[\-\d\.]+/,'');
+    return isNaN(p) ? { v: q, f: color, u: ''} : { v: p, f: interpolate, u: q };
+  }
+  
+  function normalize(style){
+    var css, rules = {}, i = props.length, v;
+    parseEl.innerHTML = '<div style="'+style+'"></div>';
+    css = parseEl.childNodes[0].style;
+    while(i--) if(v = css[props[i]]) rules[props[i]] = parse(v);
+    return rules;
+  }  
+  
+  container[grapher] = function(el, style, opts, after){
+    el = typeof el == 'string' ? document.getElementById(el) : el;
+    opts = opts || {};
+    var target = normalize(style), comp = el.currentStyle ? el.currentStyle : getComputedStyle(el, null),
+      prop, current = {}, start = +new Date, dur = opts.duration||200, finish = start+dur, interval,
+      easing = opts.easing || function(pos){ return (-Math.cos(pos*Math.PI)/2) + 0.5; };
+    for(prop in target) current[prop] = parse(comp[prop]);
+    interval = setInterval(function(){
+      var time = +new Date, pos = time>finish ? 1 : (time-start)/dur;
+      for(prop in target)
+        el.style[prop] = target[prop].f(current[prop].v,target[prop].v,easing(pos)) + target[prop].u;
+      if(time>finish) { clearInterval(interval); opts.after && opts.after(); after && setTimeout(after,1); }
+    },10);
+  }
+}('grapher', this);
+
 !function(grapher, document){
 
   grapher.initialize = function(g,o){
+  if(o.axis == undefined){o.axis = true}
+  if (o.axis){
   var G = document.getElementById(g);
    var htmlstring = "";
 	htmlstring +=axis('y',o);
@@ -50,6 +84,10 @@ hz="h"
 	htmlstring += mkLin(25,1,25,351,G);
 	htmlstring += '<style>ul.xAxis{float:left;clear:left;display:inline;width:454px;margin:0 0 0 27px;padding:0} ul.yAxis{display:inline;float:left;margin:14px 0 0;padding:0;height:370px;} ul.xAxis li{float:left;list-style:none;width:33px;text-align:center} ul.yAxis li{list-style:none;height:33px;text-align:right;float:left;clear:left}</style>'
 	m(htmlstring,G);
+	}else
+	{
+	
+	}
   }
   
   grapher.bar = function (g,d,o){
@@ -78,12 +116,17 @@ hz="h"
 									v = 33
 									th = d[i][0]*3
 									}
-									htmlstring += mD(x, y, th, v, G,getColor());
+									type = ""
+									if(o.interactive){type="bar"}
+									htmlstring += mD(x, y, th, v, G,getColor(),type);
+									
+									//htmlstring += mL(x+7, y-35, "",i+"<br/>"+ d[i][0]);
+									
 									if (d[i].length>1){
 									
 							
-										for (b=1;b<d[i].length;b++) {
-										x = 33*leftcount+28
+									for (b=1;b<d[i].length;b++) {
+									x = 33*leftcount+28
 									y = 351-d[i][b]*3
 									v = d[i][b]*3
 									th = 33
@@ -95,7 +138,9 @@ hz="h"
 									th = d[i][b]*3
 									}
 									
-										htmlstring += mD(x, y, th, v, G,getColor());}
+										htmlstring += mD(x, y, th, v, G,getColor(),type);}
+										htmlstring += mL(x+7, y-35, "",i + "<br/>"+ d[i][0]);
+									
 										}
 										leftcount += 1;
 			   };
@@ -105,19 +150,13 @@ hz="h"
 		
   }
  grapher.line = function (g,d,o){
-		
 		var mp = "missing param",c
 		var G = document.getElementById(g);
 		xoffset = 25
 		var htmlstring = "";
-		
-		
-		
 		if (G) {
 			if(!o||!d)	{m(mp,G);return false;}
-
 			var plotPoints = new Array()
-
 			counter = 0
 			for (var i in d) {
 					   if (d.hasOwnProperty(i)){	
@@ -125,15 +164,12 @@ hz="h"
 						plotPoints[counter][0] = d[i][0] + xoffset;
 						plotPoints[counter][1] = d[i][1];
 					    counter += 1
-					   
 					   }}
 			for (i=0;i<=plotPoints.length-1;i++){
 			if(plotPoints[i+1]){
 					htmlstring += mkLin(plotPoints[i][0],plotPoints[i][1],plotPoints[i+1][0],plotPoints[i+1][1],G);
 				}
 			}
-			
-
 			G.innerHTML += htmlstring;
 		}
   }
@@ -267,7 +303,36 @@ function gid() {
 }
 
 
-function mD(x, y, w, h, g, c){return '<div style="position:absolute;'+'margin-left:' + x + 'px;'+'margin-top:' + y + 'px;'+'width:' + w + 'px;'+'height:' + h + 'px;'+'clip:rect(0,'+w+'px,'+h+'px,0);'+'background-color:' + c + ';"><\/div>';}
+
+grapher.over = function(o,t){
+
+	if(t=="bar"){
+
+	grapher(o, 'background:#0f0;', { 
+        duration: 500
+      });
+	  
+	 
+	  
+	
+	  }
+}
+grapher.out = function(o,c,t){
+if(t=="bar"){
+	grapher(o, 'background:' + c + ';', { 
+        duration: 500
+      });
+	  
+	   
+	  
+	  }
+}
+
+
+function mD(x, y, w, h, g, c, t){return '<div onmouseout="javascript:grapher.out(this,\'' + c + '\',\'' + t + '\');" onmouseover="javascript:grapher.over(this,\'' + t + '\');" style="position:absolute;'+'margin-left:' + x + 'px;'+'margin-top:' + y + 'px;'+'width:' + w + 'px;'+'height:' + h + 'px;'+'clip:rect(0,'+w+'px,'+h+'px,0);'+'background-color:' + c + ';"><\/div>';}
+function mL(x, y, c, l){return '<div id="tester" style="position:absolute;'+'left:' + x + 'px;'+'opacity:0;top:' + y + 'px;z-index:99;'+'background-color:' + c + ';">' + l + '<\/div>';}
+
+
 function mkLin(x1, y1, x2, y2,g,c)
 {
 	var htmlstring = ""
