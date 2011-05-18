@@ -35,20 +35,48 @@ var hz = "h";
 			var ddW = 33,ddH = 330,	sH = '50%',	sW = '33px',om = 'left',lm1 = 'top',lm2 = 'left',mt = '22px',gh = 'height'
 			if (o.style == hz){var ddW = 330,ddH = 33,sH = '33px',sW = '50%',om = 'top',lm1 = 'right',lm2 = 'top',mt = '0px',gh = 'width'}
 			guid = 'd'+gid();
-			h = '<dl id="'+ guid +'">';			
+			h = '';			
+			var leftcount=0
 				for (var i in d) {
 					   if (d.hasOwnProperty(i)){							
 									s=d[i]
 									if (s.length>1){
 									s=s[0]						
 									}
-									h += '<dd><span style="' + gh + ':'+  s +'%;"><b>'+ s +'</b></span></dd>'
+									x = 33*leftcount+28
+									y = 351-d[i][0]*3
+									v = d[i][0]*3
+									th = 33
+									
+									if (o.style=='h'){
+									x = 25
+									y = 33*leftcount+3
+									v = 33
+									th = d[i][0]*3
+									}
+									htmlstring += mD(x, y, th, v, G,getColor());
 									if (d[i].length>1){
-										for (b=1;b<d[i].length;b++) {h+='<dd class="sub" ><span style="' + gh + ':' + d[i][b] + '%;"><b>'+ d[i][b] +'</b></span></dd> '}
+									
+							
+										for (b=1;b<d[i].length;b++) {
+										x = 33*leftcount+28
+									y = 351-d[i][b]*3
+									v = d[i][b]*3
+									th = 33
+									
+									if (o.style=='h'){
+									x = 25
+									y = 33*leftcount+3
+									v = 33
+									th = d[i][b]*3
+									}
+									
+										htmlstring += mD(x, y, th, v, G,getColor());}
 										}
+										leftcount += 1;
 			   };
 			}
-			m(htmlstring + h + '</dl>' + axis('x',o) + '<style>ul.xAxis{float:left;clear:left;display:inline;width:454px;margin:0 0 0 27px;padding:0} ul.yAxis{display:inline;float:left;margin:14px 0 0;padding:0;height:370px;} ul.xAxis li{float:left;list-style:none;width:33px;text-align:center} ul.yAxis li{list-style:none;height:33px;text-align:right;float:left;clear:left} dl#'+guid+',dl#'+guid+' dt,dl#'+guid+' dd{margin:0;padding:0} dl#'+guid+'{width:454px;height:360px;padding-left:11px;float:left} dl#'+guid+' dd{position:relative;display:block;float:left;width:' + ddW + 'px;height:' + ddH + 'px;margin-top:' + mt + ';} dl#'+guid+' span{position:absolute;display:block;width:' + sW + ';bottom:0;left:0;z-index:1;color:#555;text-decoration:none;height:' + sH + ';background:#456} dl#'+guid+' span b{display:block;font-weight:700;font-style:normal;float:left;line-height:200%;color:#fff;position:absolute;' + lm1 + ':5px;' + lm2 + ':3px;text-align:right;width:23px} dl#'+guid+' .sub{margin-' + om + ':-33px} dl#'+guid+' .sub span{background:#978}</style>',G);
+			m(htmlstring + axis('x',o) + '<style>ul.xAxis{float:left;clear:left;display:inline;width:454px;margin:0 0 0 27px;padding:0} ul.yAxis{display:inline;float:left;margin:14px 0 0;padding:0;height:370px;} ul.xAxis li{float:left;list-style:none;width:33px;text-align:center} ul.yAxis li{list-style:none;height:33px;text-align:right;float:left;clear:left}</style>',G);
 		}
 		
   }
