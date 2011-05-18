@@ -15,8 +15,7 @@ if (typeof Object.create != 'function'){
 !function(window){
   var grapher = window.grapher = {}
 }(window);
-
-var hz = "h";
+hz="h"
 !function(grapher, document){
   grapher.bar = function (g,d,o){
 		var mp = "missing param",c
@@ -32,8 +31,6 @@ var hz = "h";
 			//yaxis
 			m(axis('y',o),G); 
 			//plot the data
-			var ddW = 33,ddH = 330,	sH = '50%',	sW = '33px',om = 'left',lm1 = 'top',lm2 = 'left',mt = '22px',gh = 'height'
-			if (o.style == hz){var ddW = 330,ddH = 33,sH = '33px',sW = '50%',om = 'top',lm1 = 'right',lm2 = 'top',mt = '0px',gh = 'width'}
 			guid = 'd'+gid();
 			h = '';			
 			var leftcount=0
