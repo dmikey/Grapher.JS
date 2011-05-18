@@ -15,18 +15,19 @@ pre{text-align:left;}
 <a href="http://github.com/toxigenicpoem/Grapher.JS"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a> 
 <br/><br/>
 <div style="margin-left:auto;margin-right:auto;font:480% arial, serif;width:500px;text-align:justify;line-height:10px;"><span style="text-shadow:2px 0px 5px #A6A6A6;font-family: 'Annie Use Your Telescope', arial, serif;"><span style="color:#A839B2;">g</span><span style="color:#FF0071;">r</span><span style="color:#ACD030;">a</span><span style="color:#58AA00;">p</span><span style="color:#00AA78;">h</span><span style="color:#0074AE;">e</span><span style="color:#A839B2;">r</span>.js<br/></span><br/><br/><br/>
-<span style="font-size:30%;"><span style="text-shadow:0px -1px 1px #FFFFFF;position:absolute;margin-top:-10px;font-size:15px;">a micro js charting framework</span><br/><br/>current version: 0.35<br/>5.9KB (2.43KB gzipped)<br/><br/><br/><a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher.js">source 12.1KB</a>&nbsp;&nbsp;<a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher-min.js">minified 6.12KB</a><br/><br/></span><br/><br/>
+<span style="font-size:30%;"><span style="text-shadow:0px -1px 1px #FFFFFF;position:absolute;margin-top:-10px;font-size:15px;">a micro js charting framework</span><br/><br/>current version: 0.35<br/>5.94KB (2.5KB gzipped)<br/><br/><br/><a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher.js">source 11.43KB</a>&nbsp;&nbsp;<a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher-min.js">minified 5.94KB</a><br/><br/></span><br/><br/>
 <span style="font-size:20%;">
 grapher.js is a micro (very small) pure javascript framework for graphing various charts. The goal is to be a self contained <i>pure</i> javascript library, that does not use canvas or require an external library, is blazing fast, with a tiny footprint and a pretty face. There are some awesome things about grapher besides its holistic approach to size:<br/><br/>
 . requires no external libraries(no jquery), no images, or css<br/>
 . does <b>NOT</b> use canvas, no VML or SVG here.<br/>
+. a HTML4 and CSS2 rendering engine.<br/>
 . can be completely inlined (tiny)!<br/>
 . is <i><b>blazing</b></i> fast!<br/>
 . works practically everywhere!<br/>
 . features easy to use syntax.<br/>
 . is  <b>FREE</b> ,  <b>OPENSOURCE</b> , and  <b>EVOLVING</b>!<br/><br/>
-Absolutely no restrictions on how you can use grapher.js, but if you do use it, please drop <a href="http://www.twitter.com/toxigenicpoem">me</a> a line!<br/><br/>
-grapher.js is developed by <img src="http://simply-android.com/uploads/userpics/p8WGZ0YUZWUSE.jpg" width="35px"> <a href="http://www.linkedin.com/in/dmikey">Derek Anderson</a>. And is inspired by Thomas Fuchs, Walter Zorn and Balamurugan S.
+Only a few restrictions on how you can use grapher.js, but if you do use it, please drop <a href="http://www.twitter.com/toxigenicpoem">me</a> a line!<br/><br/>
+grapher.js is developed by <img src="http://simply-android.com/uploads/userpics/p8WGZ0YUZWUSE.jpg" width="35px"> <a href="http://www.linkedin.com/in/dmikey">Derek Anderson</a>. And is inspired by <a href="http://www.twitter.com/thomasfuchs" target="_new">Thomas Fuchs</a>, Walter Zorn and Balamurugan S.
 <br/><br/>
 How it works: This library has a custom rendering engine that is based on Walter Zorn's amazingly awesome jsgraphics, with some borrowed math. The rendering engine builds all graphics in pure DIVs, and relies on the CSS2 clip property.
 
@@ -57,7 +58,7 @@ How it works: This library has a custom rendering engine that is based on Walter
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"],
 	"style":"h"
     }
- 
+ 	grapher.initialize("test",options);
 	grapher.bar("test",data,options);
 </script> 
 <div style="clear:both;">&nbsp;</div> 
@@ -74,6 +75,7 @@ How it works: This library has a custom rendering engine that is based on Walter
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"],
 	"style":"h"
     }
+	grapher.initialize("test",options);
 	grapher.bar("test",data,options);
 &lt;/script&gt; 
  
@@ -96,6 +98,7 @@ How it works: This library has a custom rendering engine that is based on Walter
 	"yunits":["100","90","80","70","60","50","40","30","20","10"],
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
+	grapher.initialize("test2",options);
 	grapher.bar("test2",data,options);
 </script> 
  
@@ -114,6 +117,7 @@ How it works: This library has a custom rendering engine that is based on Walter
 	"yunits":["100","90","80","70","60","50","40","30","20","10"],
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
+	grapher.initialize("test2",options);
 	grapher.bar("test",data,options);
 &lt;/script&gt; 
  
@@ -129,6 +133,7 @@ How it works: This library has a custom rendering engine that is based on Walter
 <script type="text/javascript"> 
 	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],
 	"7":[125,155],"8":[185,15],"9":[300,300]}
+	
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -137,6 +142,7 @@ How it works: This library has a custom rendering engine that is based on Walter
 	"yunits":["100","90","80","70","60","50","40","30","20","10"],
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
+	grapher.initialize("test3",options);
 	grapher.line("test3",data,options);
 </script> 
  
@@ -159,6 +165,7 @@ How it works: This library has a custom rendering engine that is based on Walter
 	"yunits":["100","90","80","70","60","50","40","30","20","10"],
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
+	grapher.initialize("test3",options);
 	grapher.line("test3",data,options);
 &lt;/script&gt; 
  
@@ -175,15 +182,17 @@ How it works: This library has a custom rendering engine that is based on Walter
 <script type="text/javascript"> 
 	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],
 	"7":[125,155],"8":[185,15],"9":[315,300]}
-	options =   {"borderColor":"#000",
-    "width":"300px",
-    "height":"150px",
-    "ymax":800,
-    "gridlines":true,
+	options =   {
 	"yunits":["100","90","80","70","60","50","40","30","20","10"],
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
+	data2 = {"1":[1,12],"2":[25,90],"3":[55,185],"4":[75,125],"6":[75,115],
+	"7":[155,189],"8":[185,130],"9":[315,300]}
+	
+	grapher.initialize("test5",options);	
 	grapher.area("test5",data,options);
+	grapher.area("test5",data2,options);
+
 </script> 
  
  
@@ -197,6 +206,10 @@ How it works: This library has a custom rendering engine that is based on Walter
 &lt;script type="text/javascript"&gt; 
 	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],
 	"7":[125,155],"8":[185,15],"9":[300,300]}
+	
+	data2 = {"1":[1,12],"2":[25,90],"3":[55,185],"4":[75,125],"6":[75,115],
+	"7":[155,189],"8":[185,130],"9":[315,300]}
+	
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -205,7 +218,9 @@ How it works: This library has a custom rendering engine that is based on Walter
 	"yunits":["100","90","80","70","60","50","40","30","20","10"],
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
-	grapher.line("test5",data,options);
+	grapher.initialize("test5",options);	
+	grapher.area("test5",data,options);
+	grapher.area("test5",data2,options);
 &lt;/script&gt; 
  
 </pre> 
@@ -230,6 +245,7 @@ How it works: This library has a custom rendering engine that is based on Walter
 	"yunits":["100","90","80","70","60","50","40","30","20","10"],
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]
     }
+	grapher.initialize("test4",options);	
 	grapher.plot("test4",data,options);
 </script> 
  
@@ -268,7 +284,9 @@ How it works: This library has a custom rendering engine that is based on Walter
  
 <script type="text/javascript"> 
 	data = {"1":35,"2":25,"3":55,"4":75,"5":125}
-	options =   {}
+	options =   {"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]}
+	grapher.initialize("test6",options);	
 	grapher.pie("test6",data,options);
 </script> 
  
@@ -286,6 +304,54 @@ How it works: This library has a custom rendering engine that is based on Walter
  
 </pre> 
 <br/><br/> 
+
+
+<p>Fully Composite all Graphs</p> 
+
+<div style="clear:both;">&nbsp;</div> 
+ 
+<div id="test7" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;height:350px;">&nbsp;</div> 
+ 
+<script type="text/javascript"> 
+	bardata = {"1":[100,50,20],"2":[98],"3":[75,40],"4":[60],"5":[70,36],"6":[30]}
+	piedata = {"1":35,"2":25,"3":55,"4":75,"5":125}
+	linedata = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],"7":[125,155],"8":[185,15],"9":[300,300]}
+	
+	options =   {"yunits":["100","90","80","70","60","50","40","30","20","10"],
+	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"]}
+	
+	options2 =   {
+	"style":"h"
+    }
+	
+	
+	grapher.initialize("test7",options);
+	
+	grapher.bar("test7",bardata,options2);
+	
+	grapher.bar("test7",bardata,options);
+	
+	grapher.pie("test7",piedata,options);
+	
+	grapher.line("test7",linedata,options);
+	
+</script> 
+ 
+ 
+ 
+<div style="clear:both;">&nbsp;</div><br/> 
+<p>usage</p> 
+<pre class="prettyprint lang-js" style="width:700px;margin-right:auto;margin-left:auto;"> 
+
+&lt;script type="text/javascript"&gt; 
+	data = {"1":35,"2":25,"3":55,"4":75,"5":125}
+	options =   {}
+	grapher.pie("test6",data,options);
+&lt;/script&gt; 
+ 
+</pre> 
+<br/><br/> 
+
  
 <br/><br/> 
  
