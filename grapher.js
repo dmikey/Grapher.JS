@@ -1,8 +1,31 @@
 /*!
   * grapher.js (c) Derek Anderson
   * https://github.com/toxigenicpoem/grapher
-  * MIT License
-  * Code inspired or borrowed from Thomas Fuchs, Walter Zorn, Balamurugan S
+  * LGPL 2.1 License
+  * Code inspired or borrowed from Thomas Fuchs, Walter Zorn
+	Performance optimizations for Internet Explorer
+	by Thomas Frank and John Holdsworth.
+	fillPolygon method implemented by Matthieu Haller.
+	fillArc method implimented by Balamurugan S
+	
+	
+	LICENSE: LGPL
+
+	This library is free software; you can redistribute it and/or
+	modify it under the terms of the GNU Lesser General Public
+	License (LGPL) as published by the Free Software Foundation; either
+	version 2.1 of the License, or (at your option) any later version.
+
+	This library is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	Lesser General Public License for more details.
+
+	You should have received a copy of the GNU Lesser General Public
+	License along with this library; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA,
+	or see http://www.gnu.org/copyleft/lesser.html
+
 */
 
 if (typeof Object.create != 'function'){
@@ -17,20 +40,24 @@ if (typeof Object.create != 'function'){
 }(window);
 hz="h"
 !function(grapher, document){
+
+  grapher.initialize = function(g,o){
+  var G = document.getElementById(g);
+   var htmlstring = "";
+	htmlstring +=axis('y',o);
+	htmlstring +=axis('x',o);
+	htmlstring += mkLin(25,351,400,351,G);
+	htmlstring += mkLin(25,1,25,351,G);
+	htmlstring += '<style>ul.xAxis{float:left;clear:left;display:inline;width:454px;margin:0 0 0 27px;padding:0} ul.yAxis{display:inline;float:left;margin:14px 0 0;padding:0;height:370px;} ul.xAxis li{float:left;list-style:none;width:33px;text-align:center} ul.yAxis li{list-style:none;height:33px;text-align:right;float:left;clear:left}</style>'
+	m(htmlstring,G);
+  }
+  
   grapher.bar = function (g,d,o){
 		var mp = "missing param",c
 		var G = document.getElementById(g);
 	    var htmlstring = "";
-		
-		//axis lines
-		
-		htmlstring += mkLin(25,351,400,351,G);
-		htmlstring += mkLin(25,1,25,351,G);
 		if (G) {
 			if(!o||!d)	{m(mp,G);return false;}
-			//yaxis
-			m(axis('y',o),G); 
-			//plot the data
 			guid = 'd'+gid();
 			h = '';			
 			var leftcount=0
@@ -47,7 +74,7 @@ hz="h"
 									
 									if (o.style=='h'){
 									x = 25
-									y = 33*leftcount+3
+									y = 33*leftcount+5
 									v = 33
 									th = d[i][0]*3
 									}
@@ -63,7 +90,7 @@ hz="h"
 									
 									if (o.style=='h'){
 									x = 25
-									y = 33*leftcount+3
+									y = 33*leftcount+5
 									v = 33
 									th = d[i][b]*3
 									}
@@ -73,7 +100,7 @@ hz="h"
 										leftcount += 1;
 			   };
 			}
-			m(htmlstring + axis('x',o) + '<style>ul.xAxis{float:left;clear:left;display:inline;width:454px;margin:0 0 0 27px;padding:0} ul.yAxis{display:inline;float:left;margin:14px 0 0;padding:0;height:370px;} ul.xAxis li{float:left;list-style:none;width:33px;text-align:center} ul.yAxis li{list-style:none;height:33px;text-align:right;float:left;clear:left}</style>',G);
+			m(htmlstring,G);
 		}
 		
   }
@@ -84,17 +111,13 @@ hz="h"
 		xoffset = 25
 		var htmlstring = "";
 		
-		//axis lines
 		
-		htmlstring += mkLin(25,351,400,351,G);
-		htmlstring += mkLin(25,1,25,351,G);
 		
 		if (G) {
 			if(!o||!d)	{m(mp,G);return false;}
-			//yaxis
-			m(axis('y',o),G);
+
 			var plotPoints = new Array()
-			//plot the data
+
 			counter = 0
 			for (var i in d) {
 					   if (d.hasOwnProperty(i)){	
@@ -110,7 +133,7 @@ hz="h"
 				}
 			}
 			
-			m(axis('x',o),G);
+
 			G.innerHTML += htmlstring;
 		}
   }
@@ -120,14 +143,8 @@ hz="h"
 		var G = document.getElementById(g);
 		xoffset = 25
 		var htmlstring = "";
-		//axis lines
-		htmlstring += mkLin(25,351,400,351,G);
-		htmlstring += mkLin(25,1,25,351,G);
-		
 		if (G) {
 			if(!o||!d)	{m(mp,G);return false;}
-			//yaxis
-			m(axis('y',o),G);
 			var plotPoints = new Array()
 			var xarray = new Array()
 			var yarray = new Array()
@@ -148,9 +165,8 @@ hz="h"
 					   
 			yarray[counter+1] = 350;
 			xarray[counter+1] = 325;
-			htmlstring += fillPolygon(xarray, yarray,G,"#0ef");
-		
-			m(axis('x',o),G);
+			htmlstring += fillPolygon(xarray, yarray,G,getColor());
+
 			G.innerHTML += htmlstring;
 		}
 		
@@ -160,16 +176,10 @@ hz="h"
  grapher.plot = function (g,d,o){
 		var mp = "missing param",c
 		var G = document.getElementById(g);
-		//axis lines
-		var htmlstring = "";
-		htmlstring += mkLin(25,351,400,351,G);
-		htmlstring += mkLin(25,1,25,351,G);
-		
+		var htmlstring = "";		
 		xoffset = 25
 		if (G) {
 			if(!o||!d)	{m(mp,G);return false;}
-			//yaxis
-			m(axis('y',o),G);
 			var plotPoints = new Array()
 			//plot the data
 			counter = 0
@@ -178,16 +188,13 @@ hz="h"
 					    plotPoints[counter] = new Array();
 						plotPoints[counter][0] = d[i][0] + xoffset;
 						plotPoints[counter][1] = d[i][1];
-					    counter += 1
-					   
+					    counter += 1;
 					   }}
 			for (i=0;i<=plotPoints.length-1;i++){
 			if(plotPoints[i]){
 					htmlstring += mD(plotPoints[i][0], plotPoints[i][1], 4, 4, G,'#000');
 				}
 			}
-			
-			m(axis('x',o),G);
 			G.innerHTML += htmlstring;
 		}
   }
@@ -195,15 +202,14 @@ hz="h"
 grapher.pie = function (g,d,o){
 
 
-		var mp = "missing param",c
-		var G = document.getElementById(g);
+	var mp = "missing param",c
+	var G = document.getElementById(g);
 
-		xoffset = 25
-		if (G) {
-			if(!o||!d)	{m(mp,G);return false;}
+	xoffset = 25
+	if (G) {if(!o||!d)	{m(mp,G);return false;}
 
 
-			//plot the data
+	//plot the data
 			
    var r  = 75;
    var sx = 250;
@@ -230,9 +236,11 @@ grapher.pie = function (g,d,o){
 				   mxa = (mx < 0 ? 50 : 0);
 					   
 				}}
-			G.innerHTML += htmlstring;
+			
 		//border
-		//drawEllipse(sx-r, sy-r, 2*r, 2*r,c);
+		 htmlstring +=  drawEllipse(sx-r, sy-r, 2*r, 2*r,c);
+		
+		G.innerHTML += htmlstring;
 	 }
   }
   
@@ -313,10 +321,10 @@ function integer_compare(x,y)
 {
 	return (x < y) ? -1 : ((x > y)*1);
 }
-	this.fillPolygon = function(array_x, array_y,g,c)
+
+this.fillPolygon = function(array_x, array_y,g,c)
 	{
 		if(!c){c='#000'}
-	
 		var i;
 		var y;
 		var miny, maxy;
@@ -326,10 +334,7 @@ function integer_compare(x,y)
 		var ints;
 		var htmlstring = "";
 		var n = array_x.length;
-
 		if (!n) return;
-
-
 		miny = array_y[0];
 		maxy = array_y[0];
 		for (i = 1; i < n; i++)
@@ -371,8 +376,6 @@ function integer_compare(x,y)
 					x1 = array_x[ind2];
 				}
 				else continue;
-
-				 // modified 11. 2. 2004 Walter Zorn
 				if ((y >= y1) && (y < y2))
 					polyInts[ints++] = Math.round((y-y1) * (x2-x1) / (y2-y1) + x1);
 
@@ -458,6 +461,66 @@ function integer_compare(x,y)
     yc.push(y);
     return fillPolygon(xc, yc,g,getColor());
   }
+  
+  	this.drawEllipse = function(x, y, w, h)
+	{
+		return mkOv(x, y, w, h);
+	};
+	
+	this.mkOvQds = function(cx, cy, xl, xr, yt, yb, w, h)
+	{
+		var htmlstring = ""
+		htmlstring += mD(xr+cx, yt+cy, w, h,undefined,"#000");
+		htmlstring += mD(xr+cx, yb+cy, w, h,undefined,"#000");
+		htmlstring += mD(xl+cx, yb+cy, w, h,undefined,"#000");
+		htmlstring += mD(xl+cx, yt+cy, w, h,undefined,"#000");
+		return htmlstring;
+	};
+function mkOv(left, top, width, height)
+{
+	var htmlstring = ""
+	var a = width>>1, b = height>>1,
+	wod = width&1, hod = (height&1)+1,
+	cx = left+a, cy = top+b,
+	x = 0, y = b,
+	ox = 0, oy = b,
+	aa = (a*a)<<1, bb = (b*b)<<1,
+	st = (aa>>1)*(1-(b<<1)) + bb,
+	tt = (bb>>1) - aa*((b<<1)-1),
+	w, h;
+	while (y > 0)
+	{
+		if (st < 0)
+		{
+			st += bb*((x<<1)+3);
+			tt += (bb<<1)*(++x);
+		}
+		else if (tt < 0)
+		{
+			st += bb*((x<<1)+3) - (aa<<1)*(y-1);
+			tt += (bb<<1)*(++x) - aa*(((y--)<<1)-3);
+			w = x-ox;
+			h = oy-y;
+			if (w&2 && h&2)
+			{
+				htmlstring += mkOvQds(cx, cy, -x+2, ox+wod, -oy, oy-1+hod, 1, 1);
+				htmlstring += mkOvQds(cx, cy, -x+1, x-1+wod, -y-1, y+hod, 1, 1);
+			}
+			else htmlstring += mkOvQds(cx, cy, -x+1, ox+wod, -oy, oy-h+hod, w, h);
+			ox = x;
+			oy = y;
+		}
+		else
+		{
+			tt -= aa*((y<<1)-3);
+			st -= (aa<<1)*(--y);
+		}
+	}
+	htmlstring += mD(cx-a, cy-oy, a-ox+1, (oy<<1)+hod,undefined,"#000");
+	htmlstring += mD(cx+ox+wod, cy-oy, a-ox+1, (oy<<1)+hod,undefined,"#000");
+
+	return htmlstring;
+}
   
   ct = 0;
   this.getColor = function()
