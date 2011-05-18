@@ -7,18 +7,17 @@ body{text-align:center;}
 pre{text-align:left;}
 </style> 
  <link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" /> 
- 
-    <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js" type="text/javascript"></script> 
+ <link href='https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope' rel='stylesheet' type='text/css'>
+ <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js" type="text/javascript"></script> 
 </head> 
  
 <body onload="prettyPrint()"> 
-<!--a href="http://github.com/toxigenicpoem/Grapher.JS"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a--> 
+<a href="http://github.com/toxigenicpoem/Grapher.JS"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a> 
 <br/><br/>
-<div style="margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;text-align:justify;line-height:10px;">grapher.js<br/>
-<br/><br/><br/>
-<span style="font-size:30%;">a micro js charting framework<br/><br/>current version: 0.35<br/>5.4KB (2.23KB gzipped)<br/><br/><a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher.js">source 11.6KB</a><br/><a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher-min.js">minified 5.4KB</a></span><br/><br/>
+<div style="margin-left:auto;margin-right:auto;font:480% arial, serif;width:500px;text-align:justify;line-height:10px;"><span style="text-shadow:2px 0px 5px #A6A6A6;font-family: 'Annie Use Your Telescope', arial, serif;"><span style="color:#A839B2;">g</span><span style="color:#FF0071;">r</span><span style="color:#ACD030;">a</span><span style="color:#58AA00;">p</span><span style="color:#00AA78;">h</span><span style="color:#0074AE;">e</span><span style="color:#A839B2;">r</span>.js<br/></span><br/><br/><br/>
+<span style="font-size:30%;"><span style="text-shadow:0px -1px 1px #FFFFFF;position:absolute;margin-top:-10px;font-size:15px;">a micro js charting framework</span><br/><br/>current version: 0.35<br/>5.9KB (2.43KB gzipped)<br/><br/><br/><a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher.js">source 12.1KB</a>&nbsp;&nbsp;<a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher-min.js">minified 6.12KB</a><br/><br/></span><br/><br/>
 <span style="font-size:20%;">
-grapher.js is a micro (very small) pure javascript framework for graphing various charts. Its goal is to be a self contained pure javascript library, that does not use canvas, is blazing fast, and supports more than modern browsers, with a tiny footprint and a pretty face. There are some awesome things about grapher besides its holistic approach to size:<br/><br/>
+grapher.js is a micro (very small) pure javascript framework for graphing various charts. The goal is to be a self contained <i>pure</i> javascript library, that does not use canvas or require an external library, is blazing fast, with a tiny footprint and a pretty face. There are some awesome things about grapher besides its holistic approach to size:<br/><br/>
 . requires no external libraries(no jquery), no images, or css<br/>
 . does <b>NOT</b> use canvas, no VML or SVG here.<br/>
 . can be completely inlined (tiny)!<br/>
@@ -26,15 +25,25 @@ grapher.js is a micro (very small) pure javascript framework for graphing variou
 . works practically everywhere!<br/>
 . features easy to use syntax.<br/>
 . is  <b>FREE</b> ,  <b>OPENSOURCE</b> , and  <b>EVOLVING</b>!<br/><br/>
-Absolutely no restrictions on how you can use grapher.js, but if you do use it, please drop <a href="http://www.twitter.com/toxigenicpoem">me</a> a line!</span>
+Absolutely no restrictions on how you can use grapher.js, but if you do use it, please drop <a href="http://www.twitter.com/toxigenicpoem">me</a> a line!<br/><br/>
+grapher.js is developed by <img src="http://simply-android.com/uploads/userpics/p8WGZ0YUZWUSE.jpg" width="35px"> <a href="http://www.linkedin.com/in/dmikey">Derek Anderson</a>. And is inspired by Thomas Fuchs, Walter Zorn and Balamurugan S.
 <br/><br/>
+How it works: This library has a custom rendering engine that is based on Walter Zorn's amazingly awesome jsgraphics, with some borrowed math. The rendering engine builds all graphics in pure DIVs, and relies on the CSS2 clip property.
+
+</span>
+<br/><br/>
+
 </div> 
 
  
 <p style="font-size:280%;">gallery and usage guide</p> 
- 
- 
- 
+
+<p>Link to the latest version with github cdn.</p><div style="clear:both;">&nbsp;</div> 
+ <pre class="prettyprint lang-js" style="width:700px;margin-right:auto;margin-left:auto;"> 
+ &lt;script type="text/javascript"
+ src="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher.js"&gt;
+ &lt;/script&gt; 
+ </pre>
 <p>Bar Graph, Horizontal Style, with Bar stack</p><div style="clear:both;">&nbsp;</div> 
 <div id="test" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div> 
 <script type="text/javascript"> 
