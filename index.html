@@ -2,26 +2,43 @@
 <html>
 <head>
 <script type="text/javascript" src="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher-min.js"></script>
-<style>
+<style> 
 body{text-align:center;}
 pre{text-align:left;}
-</style>
+</style> 
+ <link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" /> 
+ 
+    <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js" type="text/javascript"></script> 
+</head> 
+ 
+<body onload="prettyPrint()"> 
+<!--a href="http://github.com/toxigenicpoem/Grapher.JS"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a--> 
+<br/><br/>
+<div style="margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;text-align:justify;line-height:10px;">grapher.js<br/>
+<br/><br/><br/>
+<span style="font-size:30%;">a micro js charting framework<br/><br/>current version: 0.35<br/>5.9KB (2.43KB gzipped)<br/><br/><a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher.js">source 12.1KB</a><br/><a href="https://github.com/toxigenicpoem/Grapher.JS/raw/master/grapher-min.js">minified 6.12KB</a></span><br/><br/>
+<span style="font-size:20%;">
+grapher.js is a micro (very small) pure javascript framework for graphing various charts. Its goal is to be a self contained pure javascript library, that does not use canvas, is blazing fast, and supports more than modern browsers, with a tiny footprint and a pretty face. There are some awesome things about grapher besides its holistic approach to size:<br/><br/>
+. requires no external libraries(no jquery), no images, or css<br/>
+. does <b>NOT</b> use canvas, no VML or SVG here.<br/>
+. can be completely inlined (tiny)!<br/>
+. is <i><b>blazing</b></i> fast!<br/>
+. works practically everywhere!<br/>
+. features easy to use syntax.<br/>
+. is  <b>FREE</b> ,  <b>OPENSOURCE</b> , and  <b>EVOLVING</b>!<br/><br/>
+Absolutely no restrictions on how you can use grapher.js, but if you do use it, please drop <a href="http://www.twitter.com/toxigenicpoem">me</a> a line!</span>
+<br/><br/>
+</div> 
 
-</head>
-
-<body> 
-<!--a href="http://github.com/toxigenicpoem/Grapher.JS"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a-->
-<div style="margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;line-height:50px;">grapher.js<br/><span style="font-size:30%;">a micro js charting framework<br/>current version: 0.35<br/>5.9KB (2.43KB gzipped)</span><br/><br/><span style="font-size:20%;line-height:0px;">grapher.js is under 5Kb, and brings you full featured 2D graphs.<br/>grapher.js requires no external libraries, images, or css<br/>grapher.js does not use canvas<br/>grapher.js requires only 1 http call or you could inline the whole thing!<br/>grapher.js works practically everywhere!<br/>grapher.js is FREE!</span><br/><br/></div>
-
-
-<p style="font-size:280%;">gallery and usage guide</p>
-
-
-
-<p>Bar Graph, Horizontal Style, with Bar stack</p><div style="clear:both;">&nbsp;</div>
-<div id="test" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
+ 
+<p style="font-size:280%;">gallery and usage guide</p> 
+ 
+ 
+ 
+<p>Bar Graph, Horizontal Style, with Bar stack</p><div style="clear:both;">&nbsp;</div> 
+<div id="test" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div> 
 <script type="text/javascript"> 
-	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
+	data = {"1":[100,50,20],"2":[98],"3":[75,40],"4":[60],"5":[70,36],"6":[30]}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -31,14 +48,14 @@ pre{text-align:left;}
 	"xunits":["Mon","Tue","Wed","Thu","Fri","Mon","Tue","Wed","Thu","Fri"],
 	"style":"h"
     }
-
+ 
 	grapher.bar("test",data,options);
-</script>
-<div style="clear:both;">&nbsp;</div>
-<p>usage</p>
-<pre class="prettyprint">
+</script> 
+<div style="clear:both;">&nbsp;</div> 
+<p>usage</p> 
+<pre class="prettyprint lang-js" style="width:700px;margin-right:auto;margin-left:auto;"> 
 &lt;script type="text/javascript"&gt; 
-	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
+	data = {"1":[100,50,20],"2":[98],"3":[75,40],"4":[60],"5":[70,36],"6":[30]}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -50,18 +67,18 @@ pre{text-align:left;}
     }
 	grapher.bar("test",data,options);
 &lt;/script&gt; 
-
-</pre>
-<br/><br/>
-
-<p>Bar Graph, Vertical Style, with Bar stack</p>
-
-<div style="clear:both;">&nbsp;</div>
-
-<div id="test2" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
-
+ 
+</pre> 
+<br/><br/> 
+ 
+<p>Bar Graph, Vertical Style, with Bar stack</p> 
+ 
+<div style="clear:both;">&nbsp;</div> 
+ 
+<div id="test2" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div> 
+ 
 <script type="text/javascript"> 
-	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
+	data = {"1":[100,50,20],"2":[98],"3":[75,40],"4":[60],"5":[70,36],"6":[30]}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -72,11 +89,12 @@ pre{text-align:left;}
     }
 	grapher.bar("test2",data,options);
 </script> 
+ 
+<div style="clear:both;">&nbsp;</div> 
+ 
+<p>usage</p> 
+<pre class="prettyprint lang-js" style="width:700px;margin-right:auto;margin-left:auto;"> 
 
-<div style="clear:both;">&nbsp;</div>
-
-<p>usage</p>
-<pre class="prettyprint">
 &lt;script type="text/javascript"&gt; 
 	data = {"1":[100,50,20],"2":98,"3":[75,40],"4":60,"5":[70,36],"6":30}
 	options =   {"borderColor":"#000",
@@ -89,18 +107,19 @@ pre{text-align:left;}
     }
 	grapher.bar("test",data,options);
 &lt;/script&gt; 
-
-</pre>
-<br/><br/>
-
-<p>Line Graph</p>
-
-<div style="clear:both;">&nbsp;</div>
-
-<div id="test3" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
-
+ 
+</pre> 
+<br/><br/> 
+ 
+<p>Line Graph</p> 
+ 
+<div style="clear:both;">&nbsp;</div> 
+ 
+<div id="test3" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div> 
+ 
 <script type="text/javascript"> 
-	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],"7":[125,155],"8":[185,15],"9":[300,300]}
+	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],
+	"7":[125,155],"8":[185,15],"9":[300,300]}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -111,16 +130,18 @@ pre{text-align:left;}
     }
 	grapher.line("test3",data,options);
 </script> 
+ 
+ 
+ 
+<div style="clear:both;">&nbsp;</div><br/> 
+ 
+ 
+<p>usage</p> 
+<pre class="prettyprint lang-js" style="width:700px;margin-right:auto;margin-left:auto;"> 
 
-
-
-<div style="clear:both;">&nbsp;</div><br/>
-
-
-<p>usage</p>
-<pre class="prettyprint">
 &lt;script type="text/javascript"&gt; 
-	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],"7":[125,155],"8":[185,15],"9":[300,300]}
+	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],
+	"7":[125,155],"8":[185,15],"9":[300,300]}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -131,19 +152,20 @@ pre{text-align:left;}
     }
 	grapher.line("test3",data,options);
 &lt;/script&gt; 
-
-</pre>
-<br/><br/>
-<br/><br/>
-
-<p>Area Graph</p>
-
-<div style="clear:both;">&nbsp;</div>
-
-<div id="test5" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
-
+ 
+</pre> 
+<br/><br/> 
+<br/><br/> 
+ 
+<p>Area Graph</p> 
+ 
+<div style="clear:both;">&nbsp;</div> 
+ 
+<div id="test5" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div> 
+ 
 <script type="text/javascript"> 
-	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],"7":[125,155],"8":[185,15],"9":[315,300]}
+	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],
+	"7":[125,155],"8":[185,15],"9":[315,300]}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -154,16 +176,18 @@ pre{text-align:left;}
     }
 	grapher.area("test5",data,options);
 </script> 
+ 
+ 
+ 
+<div style="clear:both;">&nbsp;</div><br/> 
+ 
+ 
+<p>usage</p> 
+<pre class="prettyprint lang-js" style="width:700px;margin-right:auto;margin-left:auto;"> 
 
-
-
-<div style="clear:both;">&nbsp;</div><br/>
-
-
-<p>usage</p>
-<pre class="prettyprint">
 &lt;script type="text/javascript"&gt; 
-	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],"7":[125,155],"8":[185,15],"9":[300,300]}
+	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],
+	"7":[125,155],"8":[185,15],"9":[300,300]}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -174,20 +198,21 @@ pre{text-align:left;}
     }
 	grapher.line("test5",data,options);
 &lt;/script&gt; 
-
-</pre>
-
-
-
-
-<p>Plotter Graph</p>
-
-<div style="clear:both;">&nbsp;</div>
-
-<div id="test4" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div>
-
+ 
+</pre> 
+ 
+ 
+ 
+ 
+<p>Plotter Graph</p> 
+ 
+<div style="clear:both;">&nbsp;</div> 
+ 
+<div id="test4" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;">&nbsp;</div> 
+ 
 <script type="text/javascript"> 
-	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"7":[125,155],"8":[185,15],"9":[300,300]}
+	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],
+	"7":[125,155],"8":[185,15],"9":[300,300]}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -198,15 +223,17 @@ pre{text-align:left;}
     }
 	grapher.plot("test4",data,options);
 </script> 
+ 
+ 
+ 
+<div style="clear:both;">&nbsp;</div><br/> 
+ 
+<p>usage</p> 
+<pre class="prettyprint lang-js" style="width:700px;margin-right:auto;margin-left:auto;"> 
 
-
-
-<div style="clear:both;">&nbsp;</div><br/>
-
-<p>usage</p>
-<pre class="prettyprint">
 &lt;script type="text/javascript"&gt; 
-	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],"7":[125,155],"8":[185,15],"9":[300,300]}
+	data = {"1":[1,1],"2":[25,75],"3":[55,65],"4":[75,105],"6":[75,105],
+	"7":[125,155],"8":[185,15],"9":[300,300]}
 	options =   {"borderColor":"#000",
     "width":"300px",
     "height":"150px",
@@ -217,52 +244,53 @@ pre{text-align:left;}
     }
 	grapher.plot("test4",data,options);
 &lt;/script&gt; 
-
-</pre>
-<br/><br/>
-
-
-
-
-<p>Pie Graph</p>
-
-<div style="clear:both;">&nbsp;</div>
-
-<div id="test6" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;height:350px;">&nbsp;</div>
-
+ 
+</pre> 
+<br/><br/> 
+ 
+ 
+ 
+ 
+<p>Pie Graph</p> 
+ 
+<div style="clear:both;">&nbsp;</div> 
+ 
+<div id="test6" style="margin-left:auto;margin-right:auto;font:70% Arial, Helvetica, sans-serif;line-height:180%;width:500px;height:350px;">&nbsp;</div> 
+ 
 <script type="text/javascript"> 
 	data = {"1":35,"2":25,"3":55,"4":75,"5":125}
 	options =   {}
 	grapher.pie("test6",data,options);
 </script> 
+ 
+ 
+ 
+<div style="clear:both;">&nbsp;</div><br/> 
+<p>usage</p> 
+<pre class="prettyprint lang-js" style="width:700px;margin-right:auto;margin-left:auto;"> 
 
-
-
-<div style="clear:both;">&nbsp;</div><br/>
-<p>usage</p>
-<pre class="prettyprint">
 &lt;script type="text/javascript"&gt; 
 	data = {"1":35,"2":25,"3":55,"4":75,"5":125}
 	options =   {}
 	grapher.pie("test6",data,options);
 &lt;/script&gt; 
-
-</pre>
-<br/><br/>
-
-<br/><br/>
-
-
-
-<div style="text-align:justify;margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;line-height:25px;">
-<span style="font-size:20%;line-height:0px;">
-
-
-
-</span>
-<br/><br/></div>
-
-<br/><br/>
-</body>
-
+ 
+</pre> 
+<br/><br/> 
+ 
+<br/><br/> 
+ 
+ 
+ 
+<div style="text-align:justify;margin-left:auto;margin-right:auto;font:480% Arial, Helvetica, sans-serif;width:500px;line-height:25px;"> 
+<span style="font-size:20%;line-height:0px;"> 
+ 
+ 
+ 
+</span> 
+<br/><br/></div> 
+ 
+<br/><br/> 
+</body> 
+ 
 </html>
