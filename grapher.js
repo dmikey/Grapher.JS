@@ -18,6 +18,23 @@ if (typeof Object.create != 'function'){
   }
 }
 
+getElementsByClassName = function(className)
+	{
+		var hasClassName = new RegExp("(?:^|\\s)" + className + "(?:$|\\s)");
+		var allElements = document.getElementsByTagName("*");
+		var results = [];
+
+		var element;
+		for (var i = 0; (element = allElements[i]) != null; i++) {
+			var elementClass = element.className;
+			if (elementClass && elementClass.indexOf(className) != -1 && hasClassName.test(elementClass))
+				results.push(element);
+		}
+
+		return results;
+	}
+
+
 !function(window){
   var grapher = window.grapher = {}
 }(window);
@@ -74,6 +91,7 @@ if (typeof Object.create != 'function'){
 !function(grapher, document){
 
   grapher.initialize = function(g,o){
+  ct = 0
   if(o.axis == undefined){o.axis = true}
   if (o.axis){
   var G = document.getElementById(g);
@@ -118,6 +136,7 @@ if (typeof Object.create != 'function'){
 									}
 									type = ""
 									if(o.interactive){type="bar"}
+									ct = 0
 									htmlstring += mD(x, y, th, v, G,getColor(),type);
 									
 									//htmlstring += mL(x+7, y-35, "",i+"<br/>"+ d[i][0]);
@@ -264,7 +283,7 @@ grapher.pie = function (g,d,o){
 				   if (d.hasOwnProperty(i)){	
 				   var angle = Math.round(d[i]/total*360);
 				   var pc    = Math.round(d[i]/total*100);
-				   htmlstring += fillArc(sx, sy, r, st_angle, st_angle+angle, G);
+				   htmlstring += fillArc(sx, sy, r, st_angle, st_angle+angle, G,undefined,"pie", "pie"+ angle+"."  + gid());
 				   var ang_rads = (st_angle+(angle/2))*2*Math.PI/360;
 				   var my  = Math.sin(ang_rads) * hyp;
 				   var mx  = Math.cos(ang_rads) * hyp;
@@ -274,7 +293,7 @@ grapher.pie = function (g,d,o){
 				}}
 			
 		//border
-		 htmlstring +=  drawEllipse(sx-r, sy-r, 2*r, 2*r,c);
+		 htmlstring +=  drawEllipse(sx-r, sy-r, 2*r, 2*r,c,"pie");
 		
 		G.innerHTML += htmlstring;
 	 }
@@ -303,19 +322,51 @@ function gid() {
 }
 
 
+grapher.click = function(o,t,c){
+
+	if(t=="pie"){
+	parts = getElementsByClassName(o.className);
+	var rel
+	for (i=0;i<parts.length;i++)
+		{
+	
+		if(parts[i].getAttribute('rel') == "off"){
+		
+		
+		
+		x = parseInt(parts[i].style.marginLeft)*1-10;
+			grapher(parts[i], 'margin-left:' + x + 'px;', { 
+				duration: 500
+			  });
+			  rel="on"
+		}
+		if(parts[i].getAttribute('rel') == "on"){
+		x = parseInt(parts[i].style.marginLeft)*1+10;
+			grapher(parts[i], 'margin-left:' + x + 'px;', { 
+				duration: 500
+			  });
+			  rel="off"
+		}
+		parts[i].setAttribute('rel',rel);
+		
+		}
+	
+	}
+}
 
 grapher.over = function(o,t){
 
 	if(t=="bar"){
-
-	grapher(o, 'background:#0f0;', { 
+	grapher(o, 'background:#B5BCD9;', { 
         duration: 500
       });
-	  
-	 
-	  
-	
 	  }
+	  
+	  if(t=="pie"){
+	  
+	  }
+
+	  
 }
 grapher.out = function(o,c,t){
 if(t=="bar"){
@@ -323,13 +374,30 @@ if(t=="bar"){
         duration: 500
       });
 	  
-	   
+}
 	  
-	  }
+	if(t=="pie"){
+	//parts = getElementsByClassName(o.className);
+	
+	//for (i=0;i<parts.length;i++)
+		//{
+		//grapher(parts[i], 'background:' + c + ';', { 
+		//		duration: 500
+		//	  });
+		//}
+	
+	}
+	
 }
 
 
-function mD(x, y, w, h, g, c, t){return '<div onmouseout="javascript:grapher.out(this,\'' + c + '\',\'' + t + '\');" onmouseover="javascript:grapher.over(this,\'' + t + '\');" style="position:absolute;'+'margin-left:' + x + 'px;'+'margin-top:' + y + 'px;'+'width:' + w + 'px;'+'height:' + h + 'px;'+'clip:rect(0,'+w+'px,'+h+'px,0);'+'background-color:' + c + ';"><\/div>';}
+function mD(x, y, w, h, g, c, t, group){
+
+if(group){//console.log(group);
+}
+
+return '<div class="' + group + '" rel="off" onclick="javascript:grapher.click(this,\'' + t + '\',\'' + c + '\');" onmouseout="javascript:grapher.out(this,\'' + c + '\',\'' + t + '\');" onmouseover="javascript:grapher.over(this,\'' + t + '\');" style="position:absolute;'+'margin-left:' + x + 'px;'+'margin-top:' + y + 'px;'+'width:' + w + 'px;'+'height:' + h + 'px;'+'clip:rect(0,'+w+'px,'+h+'px,0);'+'background-color:' + c + ';"><\/div>';
+}
 function mL(x, y, c, l){return '<div id="tester" style="position:absolute;'+'left:' + x + 'px;'+'opacity:0;top:' + y + 'px;z-index:99;'+'background-color:' + c + ';">' + l + '<\/div>';}
 
 
@@ -387,8 +455,10 @@ function integer_compare(x,y)
 	return (x < y) ? -1 : ((x > y)*1);
 }
 
-this.fillPolygon = function(array_x, array_y,g,c)
+this.fillPolygon = function(array_x, array_y,g,c,t,group)
 	{
+		if(!group){//console.log(group);
+		}
 		if(!c){c='#000'}
 		var i;
 		var y;
@@ -449,14 +519,15 @@ this.fillPolygon = function(array_x, array_y,g,c)
 			}
 			polyInts.sort(integer_compare);
 			for (i = 0; i < ints; i+=2)
-			htmlstring += mD(polyInts[i], y, polyInts[i+1]-polyInts[i]+1, 1,g,c);
+			htmlstring += mD(polyInts[i], y, polyInts[i+1]-polyInts[i]+1, 1,g,c,t,group);
 		}
 		
 		return htmlstring;
 	};
 	
-	this.fillEllipse = this.fillOval = function(left, top, w, h,g,c)
+	this.fillEllipse = this.fillOval = function(left, top, w, h,g,c,group)
 	{
+	
 		if(!c){c='#000'}
 		var a = (w -= 1)>>1, b = (h -= 1)>>1,
 		wod = (w&1)+1, hod = (h&1)+1,
@@ -482,8 +553,8 @@ this.fillPolygon = function(array_x, array_y,g,c)
 				dw = (x<<1)+wod;
 				tt += (bb<<1)*(++x) - aa2*(((y--)<<1)-3);
 				dh = oy-y;
-				 htmlstring += mD(pxl, cy-oy, dw, dh,g,c);
-				 htmlstring +=  mD(pxl, cy+y+hod, dw, dh,g,c);
+				 htmlstring += mD(pxl, cy-oy, dw, dh,g,c,undefined,group);
+				 htmlstring +=  mD(pxl, cy+y+hod, dw, dh,g,c,undefined,group);
 				ox = x;
 				oy = y;
 			}
@@ -493,11 +564,11 @@ this.fillPolygon = function(array_x, array_y,g,c)
 				st -= aa4*(--y);
 			}
 		}
-		 htmlstring +=  mD(cx-a, cy-oy, w+1, (oy<<1)+hod,g,c);
+		 htmlstring +=  mD(cx-a, cy-oy, w+1, (oy<<1)+hod,g,c,undefined,group);
 		 return htmlstring;
 	};
 	
-   this.fillArc = function(x, y, r, st_a, en_a, g,c)
+   this.fillArc = function(x, y, r, st_a, en_a, g,c,t,group)
   {
 	if(!c){c='#aef'}
     
@@ -524,24 +595,24 @@ this.fillPolygon = function(array_x, array_y,g,c)
         }
     xc.push(x);
     yc.push(y);
-    return fillPolygon(xc, yc,g,getColor());
+    return fillPolygon(xc, yc,g,getColor(),t,group);
   }
   
-  	this.drawEllipse = function(x, y, w, h)
+  	this.drawEllipse = function(x, y, w, h,group)
 	{
-		return mkOv(x, y, w, h);
+		return mkOv(x, y, w, h,group);
 	};
 	
-	this.mkOvQds = function(cx, cy, xl, xr, yt, yb, w, h)
+	this.mkOvQds = function(cx, cy, xl, xr, yt, yb, w, h,group)
 	{
 		var htmlstring = ""
-		htmlstring += mD(xr+cx, yt+cy, w, h,undefined,"#000");
-		htmlstring += mD(xr+cx, yb+cy, w, h,undefined,"#000");
-		htmlstring += mD(xl+cx, yb+cy, w, h,undefined,"#000");
-		htmlstring += mD(xl+cx, yt+cy, w, h,undefined,"#000");
+		htmlstring += mD(xr+cx, yt+cy, w, h,undefined,"#000",undefined,group);
+		htmlstring += mD(xr+cx, yb+cy, w, h,undefined,"#000",undefined,group);
+		htmlstring += mD(xl+cx, yb+cy, w, h,undefined,"#000",undefined,group);
+		htmlstring += mD(xl+cx, yt+cy, w, h,undefined,"#000",undefined,group);
 		return htmlstring;
 	};
-function mkOv(left, top, width, height)
+function mkOv(left, top, width, height,group)
 {
 	var htmlstring = ""
 	var a = width>>1, b = height>>1,
@@ -568,10 +639,10 @@ function mkOv(left, top, width, height)
 			h = oy-y;
 			if (w&2 && h&2)
 			{
-				htmlstring += mkOvQds(cx, cy, -x+2, ox+wod, -oy, oy-1+hod, 1, 1);
-				htmlstring += mkOvQds(cx, cy, -x+1, x-1+wod, -y-1, y+hod, 1, 1);
+				htmlstring += mkOvQds(cx, cy, -x+2, ox+wod, -oy, oy-1+hod, 1, 1,group);
+				htmlstring += mkOvQds(cx, cy, -x+1, x-1+wod, -y-1, y+hod, 1, 1,group);
 			}
-			else htmlstring += mkOvQds(cx, cy, -x+1, ox+wod, -oy, oy-h+hod, w, h);
+			else htmlstring += mkOvQds(cx, cy, -x+1, ox+wod, -oy, oy-h+hod, w, h,group);
 			ox = x;
 			oy = y;
 		}
@@ -581,13 +652,13 @@ function mkOv(left, top, width, height)
 			st -= (aa<<1)*(--y);
 		}
 	}
-	htmlstring += mD(cx-a, cy-oy, a-ox+1, (oy<<1)+hod,undefined,"#000");
-	htmlstring += mD(cx+ox+wod, cy-oy, a-ox+1, (oy<<1)+hod,undefined,"#000");
+	htmlstring += mD(cx-a, cy-oy, a-ox+1, (oy<<1)+hod,undefined,"#000",undefined,group);
+	htmlstring += mD(cx+ox+wod, cy-oy, a-ox+1, (oy<<1)+hod,undefined,"#000",undefined,group);
 
 	return htmlstring;
 }
   
-  ct = 0;
+  var ct = 0;
   this.getColor = function()
   {
 	 c_array = new Array();
