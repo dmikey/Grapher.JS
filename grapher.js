@@ -283,7 +283,8 @@ grapher.pie = function (g,d,o){
 				   if (d.hasOwnProperty(i)){	
 				   var angle = Math.round(d[i]/total*360);
 				   var pc    = Math.round(d[i]/total*100);
-				   htmlstring += fillArc(sx, sy, r, st_angle, st_angle+angle, G,undefined,"pie", "pie"+ angle+"."  + gid());
+				   var middle = st_angle+(angle/2)
+				   htmlstring += fillArc(sx, sy, r, st_angle, st_angle+angle, G,undefined,"pie", "pie."+ middle +"."  + gid());
 				   var ang_rads = (st_angle+(angle/2))*2*Math.PI/360;
 				   var my  = Math.sin(ang_rads) * hyp;
 				   var mx  = Math.cos(ang_rads) * hyp;
@@ -327,22 +328,129 @@ grapher.click = function(o,t,c){
 	if(t=="pie"){
 	parts = getElementsByClassName(o.className);
 	var rel
+	//using the class name to store some data
+	//rel used for toggling
+	//title left blank right now
+	var data = o.className.split(".");
+	
+	var r = 0 + data[1]
+	var rt = 45 - data[1]
+	var t = 90 - data[1]
+	var lt = 135 - data[1]
+	var l = 180 - data[1]
+	var lb = 225 - data[1]
+	var b = 270 - data[1]
+	var br = 315 -  data[1]
+	var r2 = 360 - data[1]
+	
+	var direction = {
+	"r": 0 + parseInt(data[1]),
+	"rt":45 - data[1],
+	"t": 90 - data[1],
+	"lt" : 135 - data[1],
+	"l" : 180 - data[1],
+	"lb" : 225 - data[1],
+	"b" : 270 - data[1],
+	"br" : 315 -  data[1],
+	"r2" : 360 - data[1]
+	}
+	var currentsmall = 360
+	var dir = ""
+	for (i in direction)
+		{
+		
+		if (Math.abs(direction[i])<currentsmall){
+			currentsmall = Math.abs(direction[i])
+			dir = i
+		}
+	
+		}
+		
+
+		
 	for (i=0;i<parts.length;i++)
 		{
 	
 		if(parts[i].getAttribute('rel') == "off"){
 		
+		if (dir == "r"){
+			x = parseInt(parts[i].style.marginLeft)*1+10;
+			y = parseInt(parts[i].style.marginTop);
+		}
 		
-		
-		x = parseInt(parts[i].style.marginLeft)*1-10;
-			grapher(parts[i], 'margin-left:' + x + 'px;', { 
+		if (dir == "rt"){
+			x = parseInt(parts[i].style.marginLeft)*1+10;
+			y = parseInt(parts[i].style.marginTop)*1-10;
+		}
+		if (dir == "t"){
+			x = parseInt(parts[i].style.marginLeft);
+			y = parseInt(parts[i].style.marginTop)*1-10;
+		}
+		if (dir == "lt"){
+			x = parseInt(parts[i].style.marginLeft)*1-10;
+			y = parseInt(parts[i].style.marginTop)*1-10;
+		}
+		if (dir == "l"){
+			x = parseInt(parts[i].style.marginLeft)*1-10;
+			y = parseInt(parts[i].style.marginTop);
+		}
+		if (dir == "lb"){
+			x = parseInt(parts[i].style.marginLeft)*1-10;
+			y = parseInt(parts[i].style.marginTop)*1+10;
+		}
+		if (dir == "b"){
+			x = parseInt(parts[i].style.marginLeft);
+			y = parseInt(parts[i].style.marginTop)*1+10;
+		}
+		if (dir == "br"){
+			x = parseInt(parts[i].style.marginLeft)*1+10;
+			y = parseInt(parts[i].style.marginTop)*1+10;
+		}
+			grapher(parts[i], 'margin-left:' + x + 'px;' +'margin-top:' + y + 'px;', { 
 				duration: 500
 			  });
 			  rel="on"
+			  
 		}
 		if(parts[i].getAttribute('rel') == "on"){
-		x = parseInt(parts[i].style.marginLeft)*1+10;
-			grapher(parts[i], 'margin-left:' + x + 'px;', { 
+		
+		if (dir == "r"){
+			x = parseInt(parts[i].style.marginLeft)*1-10;
+			y = parseInt(parts[i].style.marginTop);
+		}
+		
+		if (dir == "rt"){
+			x = parseInt(parts[i].style.marginLeft)*1-10;
+			y = parseInt(parts[i].style.marginTop)*1+10;
+		}
+		if (dir == "t"){
+			x = parseInt(parts[i].style.marginLeft);
+			y = parseInt(parts[i].style.marginTop)*1+10;
+		}
+		if (dir == "lt"){
+			x = parseInt(parts[i].style.marginLeft)*1+10;
+			y = parseInt(parts[i].style.marginTop)*1+10;
+		}
+		if (dir == "l"){
+			x = parseInt(parts[i].style.marginLeft)*1+10;
+			y = parseInt(parts[i].style.marginTop);
+		}
+		if (dir == "lb"){
+			x = parseInt(parts[i].style.marginLeft)*1+10;
+			y = parseInt(parts[i].style.marginTop)*1-10;
+		}
+		if (dir == "b"){
+			x = parseInt(parts[i].style.marginLeft);
+			y = parseInt(parts[i].style.marginTop)*1-10;
+		}
+		if (dir == "br"){
+			x = parseInt(parts[i].style.marginLeft)*1-10;
+			y = parseInt(parts[i].style.marginTop)*1-10;
+		}
+		
+		
+		
+			grapher(parts[i], 'margin-left:' + x + 'px;' +'margin-top:' + y + 'px;', { 
 				duration: 500
 			  });
 			  rel="off"
@@ -396,7 +504,7 @@ function mD(x, y, w, h, g, c, t, group){
 if(group){//console.log(group);
 }
 
-return '<div class="' + group + '" rel="off" onclick="javascript:grapher.click(this,\'' + t + '\',\'' + c + '\');" onmouseout="javascript:grapher.out(this,\'' + c + '\',\'' + t + '\');" onmouseover="javascript:grapher.over(this,\'' + t + '\');" style="position:absolute;'+'margin-left:' + x + 'px;'+'margin-top:' + y + 'px;'+'width:' + w + 'px;'+'height:' + h + 'px;'+'clip:rect(0,'+w+'px,'+h+'px,0);'+'background-color:' + c + ';"><\/div>';
+return '<div  class="' + group + '" rel="off" onclick="javascript:grapher.click(this,\'' + t + '\',\'' + c + '\');" onmouseout="javascript:grapher.out(this,\'' + c + '\',\'' + t + '\');" onmouseover="javascript:grapher.over(this,\'' + t + '\');" style="z-index:5;position:absolute;'+'margin-left:' + x + 'px;'+'margin-top:' + y + 'px;'+'width:' + w + 'px;'+'height:' + h + 'px;'+'clip:rect(0,'+w+'px,'+h+'px,0);'+'background-color:' + c + ';"><\/div>';
 }
 function mL(x, y, c, l){return '<div id="tester" style="position:absolute;'+'left:' + x + 'px;'+'opacity:0;top:' + y + 'px;z-index:99;'+'background-color:' + c + ';">' + l + '<\/div>';}
 
